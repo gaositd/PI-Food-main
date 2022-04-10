@@ -1,19 +1,11 @@
-const dietTypes = require('../../JSON/diestTypes.json');
-
+const dietTypesJSON = require('../../JSON/dietTypesJSON.json');
+const dietType = require('../../../src/db');
 async function getAllRecipes(req, res){
   res.send("Hola mundos desde recipes");
 }
 
 async function getRecipes(req, res){
   res.sen("Tipos");
-}
-
-async function getDietByType(req, res){
-  let dietTypes = await dietTypes.findAll();
-
-  if(!dietTypes.length){
-    await dietTypes.create();
-  }
 }
 
 async function putDataInDB(req, res){
@@ -23,6 +15,6 @@ async function putDataInDB(req, res){
 module.exports = {
   getAllRecipes,
   getRecipes,
-  getDietByType,
-  putDataInDB
+  // getDietByType,
+  // putDataInDB
 }

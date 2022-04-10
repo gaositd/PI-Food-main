@@ -4,9 +4,9 @@ const { Router } = require('express');
 const {
   getAllRecipes,
   getRecipes,
-  getDietByType,
-  putDataInDB,
 } = require('./controller/recipesController');
+const { getDietByType } = require('./controller/typesControler');
+// const { putDataInDB }
 
 const router = Router();
 
@@ -15,6 +15,6 @@ const router = Router();
 router.get('/recipes', getAllRecipes);
 router.get('/recipes/:id', getRecipes);
 router.get('/types', getDietByType);
-router.post('/recipes', putDataInDB);
+// router.post('/recipe', putDataInDB);
 
 module.exports = router;
