@@ -1,54 +1,61 @@
-const dietTypesJSON = require('../../JSON/dietTypesJSON.json');
-const dietType = require('../../../src/db');
-const { default: axios } = require('axios');
-// const fs = require('fs');// save all recipes into JSON file
-// const recipesJson = path.join('../../../src/JSON/recipes.json');
-const { NOT_FOUND } = require('../../constants/constant');
-let resultingRecipes = {}
+const axios = require('axios');
+const { Recipe, DietType } = require('../../../src/db');
+const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../../constants/constant');
+const WriteFile = require('../../routes/controller/writeFile.js')
 
 async function getAllRecipes(req, res){
-  const {name} = req.query;
-  const { healthScore, title, image, dishTypes, diets, summary, steps } = req.body;
+  const { name } = req.query;
+  // WriteFile();
+  if(!name){
+    res.status(404)
+       .json({ message: NO_PARAMETER })
+  }
+  // res.end("That's all folks");
   try{
-    const allRecipes = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apikey=${process.env.API_KEY}&addRecipeInformation=true`);
-
-    // fs.writeFileSync(recipesJson,allRecipes,{//write in the JSON file
-    //   encoding: "utf8",
-    //   flag: "w+",
-    //   mode: 0o666
-    // });
-
-    const recipesByName = allRecipes.map(recipe => recipe.title.include(name));
-    if(recipes){
-      resultingRecipes = {
-        healthScore,
-        title,
-        image,
-        dishTypes,
-        diets,
-        summary,
-        steps,
+    const recipes100 = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100PI = recipes100.data.results.map(recipe =>{
+      return{
+        id:recipe.id,
+        name:recipe.title,
+        image:recipe.image,
+        healthScore:recipe.healthScore,
+        summary:recipe.summary,
+        dishTypes:recipe.dishTypes.map(dish => dish),
+        diets:recipe.diets.map(diet => diet),
+        steps:recipe.analyzedInstructions,
       }
-      res.status(200)
-        .json(resultingRecipes);
-
-    }else{
+    })
+    let recipesFilter = recipes100PI.filter(recipe => 
+      recipe.name.toLowerCase().includes(name.toLowerCase()));
+    
+    const dbRecipes = await Recipe.findAll({
+      include:{
+        model:    DietType,
+        atributes:['name'],
+        through:  {
+          atributes:[],
+        },
+      },
+    });
+  
+    recipesFilter = recipesFilter.concat(dbRecipes);
+    if(recipesFilter.length === 0)
       res.status(404)
-        .json({ msg:NOT_FOUND })
-    }
+         .json({msg:NO_RECIPE})
+    else
+      res.json({recipesFilter})
+
+  }catch(err){
+    res.json({msg:err.message});
   }
-  catch(error){
-    return {
-      message: error.message
-    }
-  }
+
 }
 
 async function getRecipes(req, res){
   const {id } = req.params;
 
   try{
-    const recipe = await axios.get(`https://api.spoonacular.com/recipes/716426/information?apiKey=${process.env.API_KEY}`);
+    const recipe = await axios.get(`${SPOONACULAR}${id}${BYPK}`);
 
     if(recipe){
       resultingRecipes = {
@@ -60,20 +67,29 @@ async function getRecipes(req, res){
         summary,
         steps,
       }
-      res.status(200)
-        .json(resultingRecipes);
+    }else{
+      const dbRecipes = await Recipe.findByPk({
+        include:{
+          model:DietType,
+          atributes:['id'],
+          through:{
+            atributes:[],
+          },
+        },
+      });
+      resultingRecipes = dbRecipes;
+    }
+
+    if(resultingRecipes){
+      res.json(resultingRecipes);
     }else{
       res.status(404)
-        .json({ msg:NOT_FOUND })
+         .json({msg: NOT_FOUND});
     }
 
   }catch(error){
 
   }
-}
-
-async function putDataInDB(req, res){
-  res.send("Datos en BD");
 }
 
 module.exports = {
