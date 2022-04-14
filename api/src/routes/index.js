@@ -6,7 +6,7 @@ const {
   getRecipes,
 } = require('./controller/recipesController');
 const { getDietByType } = require('./controller/typesControler');
-// const { putDataInDB }
+const createRecipe = require('./controller/postController');
 
 const router = Router();
 
@@ -15,6 +15,6 @@ const router = Router();
 router.get('/recipes', getAllRecipes);
 router.get('/recipes/:id', getRecipes);
 router.get('/types', getDietByType);
-// router.post('/recipe', putDataInDB);
+router.post('/recipe', createRecipe);
 
 module.exports = router;

@@ -10,9 +10,9 @@ async function getAllRecipes(req, res){
     res.status(404)
        .json({ message: NO_PARAMETER })
   }
-  // res.end("That's all folks");
+
   try{
-    const recipes100 = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100 = await axios.get(`${RECIPES100}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
     const recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -52,23 +52,38 @@ async function getAllRecipes(req, res){
 }
 
 async function getRecipes(req, res){
-  const {id } = req.params;
+  const { id } = req.params;
+
+  if(!id){
+    res.status(404)
+       .json({ message: NO_PARAMETER })
+  }
 
   try{
     const recipe = await axios.get(`${SPOONACULAR}${id}${BYPK}`);
 
-    if(recipe){
-      resultingRecipes = {
-        healthScore,
-        title,
-        image,
-        dishTypes,
-        diets,
-        summary,
-        steps,
-      }
+    resultingRecipes = {
+      id:recipe.data.id,
+      name:recipe.data.title,
+      image:recipe.data.image,
+      healthScore:recipe.data.healthScore,
+      summary:recipe.data.summary,
+      dishTypes:recipe.data.dishTypes.map(dish => dish),
+      diets:recipe.data.diets.map(diet => diet),
+      steps:recipe.data.analyzedInstructions,
+    }
+
+    if(resultingRecipes){
+      res.json(resultingRecipes);
     }else{
-      const dbRecipes = await Recipe.findByPk({
+      res.status(404)
+         .json({msg: NO_RECIPE});
+    }
+
+  }catch(error){
+    
+    try{
+      const dbRecipes = await Recipe.findByPk(id,{
         include:{
           model:DietType,
           atributes:['id'],
@@ -77,18 +92,16 @@ async function getRecipes(req, res){
           },
         },
       });
-      resultingRecipes = dbRecipes;
+      
+      if(dbRecipes){
+        res.json(dbRecipes);
+      }else{
+        res.status(404)
+          .json({msg: NO_RECIPE});
+      }
+    }catch(error){
+      res.json({msg: NO_RECIPE+' '+error.message})
     }
-
-    if(resultingRecipes){
-      res.json(resultingRecipes);
-    }else{
-      res.status(404)
-         .json({msg: NOT_FOUND});
-    }
-
-  }catch(error){
-
   }
 }
 

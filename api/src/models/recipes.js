@@ -5,7 +5,7 @@ const uuid = require('uuid');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('recipe', {
+  sequelize.define("recipe", {
     id:{
       type:DataTypes.UUID,
       allowNull:false,
@@ -16,29 +16,31 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    plateSummary:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     image:{
       type:DataTypes.STRING,
       allowNull: false,
       default:'https://images.vexels.com/media/users/3/249295/isolated/lists/6b84c3546f5ab87ecf81c577245c13ae-ramen-svg-2-1.png',
       comment:'https://www.freepng.es/png-vft0iv/download.html'
     },
-    points:{
+    healthScore:{
       type: DataTypes.FLOAT,
+      default:0.00,
+    },
+    summary:{
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     healthyLevel:{
       type: DataTypes.FLOAT,
+      default:0.00,
     },
     stepByStep:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     dietType:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
-    creteInDb:{
+    createInDb:{
       type: DataTypes.BOOLEAN,
       default:true,
       comment: 'Create in internal DB',
