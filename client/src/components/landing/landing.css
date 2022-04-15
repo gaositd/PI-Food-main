@@ -1,0 +1,25 @@
+.love{
+  color: white;
+  font-size: 6rem;
+  margin-right: 40vw;
+}
+.btn{
+  background-color:black;
+  height: 5vh;
+  width: 15vh;
+  font: size 3rem;
+  font-weight:bold;
+  color: white;
+  border-radius:10px;
+  outline: white;
+}
+.btnPosition{
+  position: absolute;
+  bottom: 25vh;
+  left: 66.5vw;
+}
+.btn:hover{
+  background-color:white;
+  color: black;
+}
+/*#07050a*/

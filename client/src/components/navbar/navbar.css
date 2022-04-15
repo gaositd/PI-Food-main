@@ -1,0 +1,61 @@
+.navBar{
+  margin:1vh 0 0 0;
+  display: flex;
+  justify-content:space-evenly;
+}
+.navbar-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.navbar-sideLeft{
+  width: 20vw;
+}
+.navbar-sideCenter{
+  width: 60vw;
+}
+.navbar-sideRight{
+  width: 20vw;
+}
+.navSelect{
+  background:rgba(63, 64, 60, 0.7);
+  border: none;
+  font-size: 1rem;
+  height: 4vh;
+  width: 19vw;
+  border-radius:15px;
+}
+.btnNavBar{
+  background-color:black;
+  height: 4vh;
+  width: 7vh;
+  font: size 3rem;
+  font-weight:bold;
+  color: white;
+  border-radius:10px;
+  outline: white;
+}
+.btnSearch{
+  background-color:black;
+  height: 4vh;
+  width: 14vh;
+  font: size 3rem;
+  font-weight:bold;
+  color: white;
+  border-radius:10px;
+  outline: white;
+}
+.searchNavBar{
+  outline:none;
+  height: 3vh;
+  width: 15vw;
+  border-radius: 15px;
+  margin: 0 1vw 0 0;
+}
+.text{
+  font-weight: bolder;
+  font-size: 2.3vh;
+  color: white;
+  margin: 0 0.5vw 0 0.5vw;
+}

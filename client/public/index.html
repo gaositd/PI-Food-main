@@ -24,9 +24,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style>
+      .bakcgrounImage{
+        background-image:  url("./images/Ray_Piedra.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+                      /*100vw 100vh; Ancho  Alto */
+        margin: 0%;
+      }
+      .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* width: auto; */
+        background-color:#07050a;
+      }
+    </style>
     <title>React App</title>
   </head>
-  <body>
+  <body class="container bakcgrounImage">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
