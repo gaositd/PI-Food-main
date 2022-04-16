@@ -7,6 +7,7 @@ const {
 } = require('./controller/recipesController');
 const { getDietByType } = require('./controller/typesControler');
 const createRecipe = require('./controller/postController');
+// const cors = require('cors');
 
 const router = Router();
 
