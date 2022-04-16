@@ -1,0 +1,21 @@
+.homeContainer{
+  display: flex;
+  width: 90%;
+  height:90%;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items:center;
+  border-radius:15px;
+  background-color: rgba(62,62,63,0.7);
+  border: 1px solid rgba(255,255,255);
+  margin: 0 auto;
+}
+.recipeCard{
+  display: flex;
+  flex-grow: 3;
+  background-color: red;
+  width: 25vw;
+  height: 25vh;
+  margin: 2vh 1vw;
+  border-radius:15px
+}

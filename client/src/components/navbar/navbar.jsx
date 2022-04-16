@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import Glass from '../../images/magnifier.png';
 import './navbar.css';
 
 export function Navbar(){
@@ -36,7 +37,12 @@ export function Navbar(){
         </div>
       </section>
       <section className="navBar navbar-sideRight">
-        <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" />
+        <div className="searchNavBar">
+          <Link to="/home">
+            <img src={Glass} alt="Magnify glass" className="glass" height="25vh" />
+          </Link>
+          <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" />
+        </div>
         <button className="btnSearch" id="createRecipe" name="createRecipe" onClick={handleButtom}>
           Create Recipe
         </button>
