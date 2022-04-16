@@ -10,10 +10,10 @@ export function LandingPage(){
   }
 
   return(
-    <div>
-      <h1 className="love">Love for Food</h1>
+    <div className="landing" >
+      <h1 className="love">Passion for food</h1>
       <h1 className="love">Made with pinch of love</h1>
-      <button className="btn btnPosition" onClick={handleButtom}>
+      <button className="btn" onClick={handleButtom}>
         Go to Restaurant
       </button>
     </div>

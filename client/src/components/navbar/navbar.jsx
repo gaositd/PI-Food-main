@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import { SelectOption } from "./selectOption/selectOption";
 import Glass from '../../images/magnifier.png';
 import './navbar.css';
 
@@ -12,12 +13,7 @@ export function Navbar(){
   return(
     <header className="navbar-header">
       <section className="navBar navbar-sideLeft">
-        <select className="navSelect" id="navSelect" name="navSelect">
-          <option> </option>
-          <option>1</option>
-          <option>1</option>
-          <option>1</option>
-        </select>
+        <SelectOption />
       </section>
       <section className="navBar navbar-sideCenter">
         <div className="navbar-Sort">

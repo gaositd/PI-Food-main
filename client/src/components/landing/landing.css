@@ -1,3 +1,7 @@
+.landing{
+  display:flex;
+  flex-direction: column;
+}
 .love{
   color: white;
   font-size: 6rem;
@@ -12,11 +16,7 @@
   color: white;
   border-radius:10px;
   outline: white;
-}
-.btnPosition{
-  position: absolute;
-  bottom: 25vh;
-  left: 66.5vw;
+  margin-left: 25vw;
 }
 .btn:hover{
   background-color:white;
