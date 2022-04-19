@@ -1,0 +1,10 @@
+.cheboxContainer{
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content:center;
+}
+.cheboxLbl{
+  font-size: 1.1rem;
+  width:10vw;
+}

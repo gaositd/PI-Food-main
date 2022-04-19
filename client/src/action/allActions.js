@@ -1,15 +1,28 @@
 import axios from "axios";
-import { SERVER_DIR, TYPES, GET_DIETS, } from '../constants/constants.js';
+import {
+  SERVER_DIR, TYPES, GET_DIETS,
+  POST_RECIPE
+} from '../constants/constants.js';
 
 //get all types of diets
-export function getDiets(){
-  return function(dispatch){
-    return axios.get(`${SERVER_DIR}${TYPES}`)
-      .then(res =>{
-        console.log("res.data");
-        console.log(res.data);
-        return dispatch({type: GET_DIETS, payload: res.data})
-      })
-      .catch((err) => ({type: GET_DIETS, payload: err.message}));
+function getDiets(){
+  return async function(dispatch){
+    try {
+      const res = await axios.get(`${SERVER_DIR}${TYPES}`);
+      return dispatch({ type: GET_DIETS, payload: res.data });
+    } catch (err) {
+      return ({ type: GET_DIETS, payload: err.message });
+    }
   }
 }
+
+function setRecipe(data){
+  axios.post(`${SERVER_DIR}${POST_RECIPE}`)
+       .then(res => res.data)
+      //  .catch(err =>{msg: `${err.message}`});
+}
+
+export {
+  getDiets,
+  setRecipe,
+};

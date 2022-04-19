@@ -16,7 +16,7 @@
   color: white;
   border-radius:10px;
   outline: white;
-  margin-left: 25vw;
+  /* margin-left: 5vw; */
 }
 .btn:hover{
   background-color:white;

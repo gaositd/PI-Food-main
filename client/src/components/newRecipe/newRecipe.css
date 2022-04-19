@@ -3,9 +3,9 @@
   flex-direction: column;
   justify-content:center;
   align-items:center;
-  width: 100%;
+  width: 50%;
   height: auto;
-  margin: 3vh;
+  margin: 3vh auto;
 }
 .form{
   display: flex;
@@ -22,9 +22,9 @@
   padding:0.5vh 1vw;
   border-radius:5px;
 }
-input{
+.inputText{
   height: 3vh;
-  width: 22vw;
+  width: 30vw;
   margin: 1vh 0;
 }
 input, textarea{
@@ -50,4 +50,12 @@ input, textarea{
   color: white;
   font-weight: bold;
   text-align: center;
+  width: 100%;
+}
+.mandatory{
+ color: red;
+ font-size: 1.6rem;
+}
+.error{
+  border: red;
 }

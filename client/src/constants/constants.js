@@ -1,3 +1,5 @@
 export const SERVER_DIR = 'http://localhost:3001/';
 export const TYPES = 'types';
-export const GET_DIETS = 'GET DIETS';
+export const GET_DIETS = 'GET_DIETS';
+export const POST_RECIPE = 'recipe';
+export const SET_RECIPE = 'SET_RECIPE';

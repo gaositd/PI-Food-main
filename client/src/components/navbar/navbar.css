@@ -32,7 +32,6 @@
 .btnNavBar{
   background-color:black;
   height: 4vh;
-  width: 7vh;
   font: size 3rem;
   font-weight:bold;
   color: white;
@@ -63,8 +62,8 @@
 }
 .glass{
   position: absolute;
-  right: 215px;
-  top: 10px; 
+  right: 265px;
+  top: 11px; 
 }
 .text{
   font-weight: bolder;
