@@ -1,19 +1,19 @@
 const axios = require('axios');
 const { Recipe, DietType } = require('../../../src/db');
 const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../../constants/constant');
-const WriteFile = require('../../routes/controller/writeFile.js')
+// const WriteFile = require('../../routes/controller/writeFile.js')
 
 async function getAllRecipes(req, res){
   const { name } = req.query;
   // WriteFile();
-  if(!name){
-    res.status(404)
-       .json({ message: NO_PARAMETER })
-  }
+  // if(!name){
+  //   res.status(404)
+  //      .json({ message: NO_PARAMETER })
+  // }
 
   try{
-    const recipes100 = await axios.get(`${RECIPES100}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
-    const recipes100PI = recipes100.data.results.map(recipe =>{
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY}`);
+    let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
         name:recipe.title,
@@ -25,8 +25,8 @@ async function getAllRecipes(req, res){
         steps:recipe.analyzedInstructions,
       }
     })
-    let recipesFilter = recipes100PI.filter(recipe => 
-      recipe.name.toLowerCase().includes(name.toLowerCase()));
+    // let recipesFilter = recipes100PI.filter(recipe => 
+    //   recipe.name.toLowerCase().includes(name.toLowerCase()));
     
     const dbRecipes = await Recipe.findAll({
       include:{
@@ -38,12 +38,15 @@ async function getAllRecipes(req, res){
       },
     });
   
-    recipesFilter = recipesFilter.concat(dbRecipes);
-    if(recipesFilter.length === 0)
+    // recipesFilter = recipesFilter.concat(dbRecipes);
+    // if(recipesFilter.length === 0)
+    recipes100PI = recipes100PI.concat(dbRecipes);
+    if(recipes100.length === 0)
       res.status(404)
          .json({msg:NO_RECIPE})
     else
-      res.json({recipesFilter})
+      // res.json({recipesFilter})
+      res.json({recipes100PI})
 
   }catch(err){
     res.json({msg:err.message});

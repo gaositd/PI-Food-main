@@ -57,5 +57,12 @@ input, textarea{
  font-size: 1.6rem;
 }
 .error{
-  border: red;
+  border:1px solid red;
+  background-color: rgba(219, 7, 7, 0.7);
+  color: rgb(255, 255,255);
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  left: 10vw;
+  text-shadow: 0 0 30px #fff;
 }

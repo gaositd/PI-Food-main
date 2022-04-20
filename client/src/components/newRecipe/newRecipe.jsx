@@ -1,88 +1,88 @@
-import React, { 
+import React, {
   useState,
-  useEffect,
+  // useEffect,
 } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setRecipe } from '../../action/allActions.js';
+// import { useSelector, useDispatch } from "react-redux";
+// import { setRecipe } from '../../action/allActions.js';
 import { Checkboxes } from "./checkBoxes/checkBoxes";
 import './newRecipe.css';
-import { errorPopUp } from "../error/error";
-import crypto from 'crypto';
+// import { ErrorPopUp } from "../error/error";
+// import crypto from 'crypto';
+
+export function validate(input) {
+  let errors = {};
+  
+  if(!input.dishName){
+    errors.dishName = " Please enter a name of dishname ";
+  }else if(input.dishName.length < 4){
+    errors.dishName = " Please enter a valid name of dishname ";
+  }
+
+  if(!input.summary){
+    errors.summary = " Please enter a summary ";
+  }else if(input.summary.length <= 40){
+    errors.summary = " Please enter a valid summary of dish ";
+  }
+
+  return errors;
+}
 
 export function NewRecipe(){
   const [input, setInput] = useState({
     dishName:'',
     summary:'',
   });
+  const [errors, setErrors] = useState({});
 
-  let data;
-  
-  // const dispatch = useDispatch();
-  // const saveRecipe = useSelector(state => state.saveRecipe);
-  // useEffect(()=> dispatch(setRecipe(data)),[dispatch]);
-  
-  function validate(input) {
-    if(input.name === 'dishName' || input.name === 'summary'){
-      errorPopUp(`${input.name} mandatory field`);
-      return false;
-    }else{
-      return true;
-    }
-  }
-
-  function handleChange(event){
+  const handleInputChange =(event)=>{
     setInput({
       ...input,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
-    //validate(event.target);
-    data={
-      id: crypto.randomUUID(),
-      name:event.target.value,
-      image:'ruta',
-      healtScore:99,
-      summary:event.target.value,
-      healthyLevel:21,
-      stepByStep:event.target.value,
-      dietType:event.target.value,
-      createInDb: true,
-    }
-  }
-  // https://www.petitchef.es/recetas/plato/tacos-vegetarianos-con-lentejas-fid-1572375
-  function handleSubmit(event){
-    event.preventDefault();
-    const value =  event.target.value;
-    // if(validate(value)){
-    //   alert("form was to send it");
-    // }
+    setErrors(validate({
+      ...input,
+      [event.target.name]: event.target.value,
+    }));
   }
 
+  function handleSubmit(event){
+    event.preventDefault();
+  }
 
   return(
     <main className="mainPage">
       <form className="form" onSubmit={handleSubmit} >
         <div className="labelInput">
-          <label htmlFor="dishName" className="text">Dish Name <span className="mandatory">*</span></label>
+          <label htmlFor="dishName" className="text">Dish Name *</label>
             <input
-              className="inputText"
+              className={!errors ? errors.dishName & 'error' :'inputText'}
               type="text"
               id="dishName"
-              name="dishName" placeholder="Full Recipe Name"
+              name="dishName"
+              placeholder="Full Recipe Name"
               value={input.dishName}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
+            {
+            errors.dishName && (
+              <div className="error">{errors.dishName}</div>
+          )}
         </div>
         <div className="labelInput">
-          <label htmlFor="summary" className="text">Summary <span className="mandatory">*</span></label>
+          <label htmlFor="summary" className="text">Summary *</label>
             <textarea
-              className="txtArea"
+              className={!errors ? errors.summary & 'error' :"txtArea"}
               name="summary"
               id="summary"
               placeholder="Summary recipe"
               cols="46" rows="5"
               value={input.summary}
-              onChange={handleChange}
+              onChange={handleInputChange}
             />
+            {
+            errors.summary && (
+              <div className="error">{errors.summary}</div>
+          )}
         </div>
         <div className="labelInput">
           <label htmlFor="steps" className="text">Recipe step by step</label>
@@ -90,17 +90,25 @@ export function NewRecipe(){
         </div>
         <div className="labelInput">
           <label htmlFor="healthy" className="text">Healthy level</label>
-            <input className="inputText" type="number" id="healthy" name="healthy" min="0" max="100" placeholder="Healthy level 1 to 100"/>
+            <input
+              className="inputText"
+              type="number"
+              id="healthy"
+              name="healthy"
+              min="0"
+              max="100"
+              placeholder="Healthy level 1 to 100"
+            />
         </div>
         <div className="labelInput">
-          <label htmlFor="healthy" className="text">Loada Image Recipe</label>
-            <input
-              type="file"
-              id="picture"
-              name="picture"
-              className="inputText"
-              accept="image/png, .jpeg, .jpg, image/gif"
-            />
+        <label htmlFor="healthy" className="text">Load a Image from URL</label>
+          <input
+            type="text"
+            id="picture"
+            name="picture"
+            className="inputText"
+            placeholder="example path https://www.myImage.com/food.png"
+          />  
         </div>
         <div className="labelInput">
           <label htmlFor="score" className="text">Score Recipe</label>
@@ -131,3 +139,4 @@ export function NewRecipe(){
     </main>
   )
 }
+/*  https://www.petitchef.es/recetas/plato/tacos-vegetarianos-con-lentejas-fid-1572375 */
