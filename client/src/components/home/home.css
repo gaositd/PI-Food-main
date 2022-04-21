@@ -1,6 +1,6 @@
 .homeContainer{
   display: flex;
-  width: 82%;
+  width: 70%;
   height:90%;
   flex-wrap: wrap;
   justify-content:center;
@@ -13,9 +13,11 @@
 .recipeCard{
   display: flex;
   flex-grow: 3;
-  background-color: red;
-  width: 25vw;
-  height: 25vh;
-  margin: 2vh 1vw;
+  width: 20vw;
+  height: 23vh;
+  margin: 1vh 1vw;
   border-radius:15px
+}
+.recipeCard:hover{
+  opacity: 0.4;
 }

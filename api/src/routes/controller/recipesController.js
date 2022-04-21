@@ -12,7 +12,7 @@ async function getAllRecipes(req, res){
   // }
 
   try{
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -69,6 +69,7 @@ async function getRecipes(req, res){
       id:recipe.data.id,
       name:recipe.data.title,
       image:recipe.data.image,
+      score:recipe.data.spoonacularScore,
       healthScore:recipe.data.healthScore,
       summary:recipe.data.summary,
       dishTypes:recipe.data.dishTypes.map(dish => dish),

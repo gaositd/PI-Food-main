@@ -1,10 +1,12 @@
 import {
-  GET_DIETS, GET_RECIPES, SET_RECIPE
+  GET_DIETS, GET_RECIPES, SET_RECIPE,
+  GET_RECIPE, 
 } from'../constants/constants.js';
 const initialState ={
   allDiets:[],
   saveRecipe:{},
   allRecipes:[],
+  recipe:{},
 };
 
 const routeReducer = (state = initialState, action) => {
@@ -20,6 +22,12 @@ const routeReducer = (state = initialState, action) => {
         ...state,
         allRecipes:action.payload,
       }
+    case GET_RECIPE:{
+      return{
+        ...state,
+        recipe:action.payload,
+      }
+    }
     case SET_RECIPE:
       return {
         saveRecipe:action.payload,

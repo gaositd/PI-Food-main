@@ -1,11 +1,10 @@
 import React from 'react';
+import './error.css';
 
-export function ErrorPopUp(message) {
-  if(message){
-    return(
-      <div className="position">
-        <span className="errorText">{message}</span>
-      </div>
-    )
-  }else <div></div>
+export function ErrorPage(message) {
+  return(
+    <div className="position">
+      <h1 className="errorText">Page not found</h1>
+    </div>
+  )
 }

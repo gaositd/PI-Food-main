@@ -1,11 +1,11 @@
 .position{
-  position: absolute;
-  width: 5vw;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  width: 35vw;
   height: auto;
   border: radius 15px;
-  border: 1px solid rgb(95, 3, 3, 0.7);
-  top:3em;
-  left:0;
+  background-color: transparent;
 }
 .errorText{
   font: size 2rem;

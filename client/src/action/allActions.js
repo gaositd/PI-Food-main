@@ -1,7 +1,8 @@
 import axios from "axios";
 import {
   SERVER_DIR, TYPES, GET_DIETS,
-  POST_RECIPE, GET_RECIPES, RECIPES
+  POST_RECIPE, GET_RECIPES, RECIPES,
+  GET_RECIPE, 
 } from '../constants/constants.js';
 
 //get all types of diets
@@ -26,6 +27,17 @@ function getRecipes(){
     }
   }
 }
+//get one recipe (by ID)
+function getRecipe(id){
+  return async function(dispatch){
+    try {
+      const res = await axios.get(`${SERVER_DIR}${RECIPES}/${id}`);
+      return dispatch({ type:GET_RECIPE, payload:res.data});
+    } catch (err) {
+      return ({ type: GET_RECIPE, payload: err.message });
+    }
+  }
+}
 //data in server
 function setRecipe(data){
   axios.post(`${SERVER_DIR}${POST_RECIPE}`)
@@ -37,4 +49,5 @@ export {
   getDiets,
   setRecipe,
   getRecipes,
+  getRecipe,
 };
