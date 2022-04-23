@@ -13,13 +13,12 @@ export function Recipe(){
 
   return(
     <div className="recipeContainer">
+      {console.log(oneRecipe)}
       <div className="imageSummary">
         <img src={oneRecipe.image} alt={oneRecipe.name} title={oneRecipe.name} />
         <div className="paragraph">
           <h2 className="font title">{oneRecipe.name}</h2>
-          <p className="summary font">
-            {oneRecipe.summary}
-          </p>
+          <p className="summary font" dangerouslySetInnerHTML={{__html: oneRecipe.summary}}></p>
         </div>
       </div>
       <div className="typeHealt">
@@ -51,10 +50,12 @@ export function Recipe(){
       <span className="font title">Step by Step</span>
         <ol className="listStep">
           {
-            // console.log(oneRecipe.steps[0].steps)
-            oneRecipe.steps[0].steps && oneRecipe.steps[0].steps.map((step, i) =>{
-              return(<li key={i} className="font">{step.step}</li>)})
-          }
+           // console.log(oneRecipe)
+            // oneRecipe.steps? oneRecipe.steps[0].steps.map((step, i) =>{
+            //   return(<li key={i} className="font">{step.step}</li>)}) : <p>No hay informacion</p>
+            // console.log(oneRecipe)
+             !!oneRecipe.length? <p>{JSON.stringify(oneRecipe.steps)}</p> : <p className="font title">No recipe information</p>
+                  }
         </ol>
       </div>
     </div>

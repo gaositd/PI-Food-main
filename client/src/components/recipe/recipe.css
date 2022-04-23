@@ -41,5 +41,5 @@
   display: flex;
 }
 ul li, ol li{
-  float: left;
+  /* float: left; */
 }
