@@ -11,6 +11,9 @@
   color: white;
   margin: 0 auto;
 }
+a{
+  color: #fff;
+}
 .imageSummary{
   display: flex;
   flex-direction: row;
@@ -40,6 +43,12 @@
 .healt{
   display: flex;
 }
-ul li, ol li{
-  /* float: left; */
+.listStep{
+  float: left;
+  align-items: left;
+  text-align:left;
+  margin: 1vh 0 0 0;
+}
+.mt{
+  margin-top: 1vh;
 }

@@ -59,11 +59,6 @@ async function getAllRecipes(req, res){
 async function getRecipes(req, res){
   const { id } = req.params;
 
-  if(!id){
-    res.status(404)
-       .json({ message: NO_PARAMETER })
-  }
-
   try{
     const recipe = await axios.get(`${SPOONACULAR}${id}${BYPK}`);
 
@@ -74,14 +69,37 @@ async function getRecipes(req, res){
       score:recipe.data.spoonacularScore,
       healthScore:recipe.data.healthScore,
       summary:recipe.data.summary,
-      dishTypes:recipe.data.dishTypes.map(dish => dish),
-      diets:recipe.data.diets.map(diet => diet),
-      // steps:recipe.data.analyzedInstructions,
-      steps:recipe.analyzedInstructions.map(
+      dishTypes:recipe.data.dishTypes,
+      diets:recipe.data.diets,
+      steps:recipe.data.analyzedInstructions.map(
           analized=> analized.steps.map(
             paso=> paso.step))
     }
-debugger;
+
+    if (id.length > 6) {
+      try {
+        const dbRecipes = await Recipe.findByPk(id, {
+          include: {
+            model: DietType,
+            atributes: ['id'],
+            through: {
+              atributes: [],
+            },
+          },
+        });
+  
+        if (dbRecipes) {
+          res.json(dbRecipes);
+        } else {
+          res.status(404)
+            .json({ msg: NO_RECIPE });
+        }
+      } catch (error) {
+        res.json({ msg: NO_RECIPE + ', ' + error.message })
+      }
+      resultingRecipes = resultingRecipes.concat(dbRecipes);
+    }
+    
     if(resultingRecipes){
       res.json(resultingRecipes);
     }else{
@@ -90,27 +108,7 @@ debugger;
     }
 
   }catch(error){
-    
-    try{
-      const dbRecipes = await Recipe.findByPk(id,{
-        include:{
-          model:DietType,
-          atributes:['id'],
-          through:{
-            atributes:[],
-          },
-        },
-      });
-      
-      if(dbRecipes){
-        res.json(dbRecipes);
-      }else{
-        res.status(404)
-          .json({msg: NO_RECIPE});
-      }
-    }catch(error){
-      res.json({msg: NO_RECIPE+', '+error.message})
-    }
+    res.json({msg: NO_RECIPE+', '+error.message})
   }
 }
 

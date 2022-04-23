@@ -13,7 +13,6 @@ export function Recipe(){
 
   return(
     <div className="recipeContainer">
-      {console.log(oneRecipe)}
       <div className="imageSummary">
         <img src={oneRecipe.image} alt={oneRecipe.name} title={oneRecipe.name} />
         <div className="paragraph">
@@ -26,7 +25,6 @@ export function Recipe(){
           <span className="font title">Dish(es)</span>
           <ul>
             {
-              //console.log(oneRecipe)
               oneRecipe.dishTypes && oneRecipe.dishTypes.map((dish, i) =>{
                 return(<li key={i} className="font list">{dish}</li>)})
             }
@@ -47,16 +45,15 @@ export function Recipe(){
           </div>
       </div>
       <div className="steps">
-      <span className="font title">Step by Step</span>
-        <ol className="listStep">
-          {
-           // console.log(oneRecipe)
-            // oneRecipe.steps? oneRecipe.steps[0].steps.map((step, i) =>{
-            //   return(<li key={i} className="font">{step.step}</li>)}) : <p>No hay informacion</p>
-            // console.log(oneRecipe)
-             !!oneRecipe.length? <p>{JSON.stringify(oneRecipe.steps)}</p> : <p className="font title">No recipe information</p>
-                  }
-        </ol>
+      <span className="font title mt">Step by Step</span>
+      {console.log(oneRecipe.steps)}
+      <ol className="listStep">
+        {
+          oneRecipe.hasOwnProperty("steps") ?
+            oneRecipe.steps[0].map( (step, i) => <li key={i} className="font title listStep">{step}</li> ):
+            <span className="font title">{oneRecipe.steps}</span>
+        }
+      </ol>
       </div>
     </div>
   );
