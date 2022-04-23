@@ -4,7 +4,7 @@ const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../.
 // const WriteFile = require('../../routes/controller/writeFile.js')
 
 async function getAllRecipes(req, res){
-  const { name } = req.query;
+  const { page } = req.query;
   // WriteFile();
   // if(!name){
   //   res.status(404)
@@ -12,7 +12,7 @@ async function getAllRecipes(req, res){
   // }
 
   try{
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY0}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -20,9 +20,11 @@ async function getAllRecipes(req, res){
         image:recipe.image,
         healthScore:recipe.healthScore,
         summary:recipe.summary,
-        dishTypes:recipe.dishTypes.map(dish => dish),
-        diets:recipe.diets.map(diet => diet),
-        steps:recipe.analyzedInstructions,
+        dishTypes:recipe.dishTypes,
+        diets:recipe.diets,
+        steps:recipe.analyzedInstructions.map(
+          analized=> analized.steps.map(
+            paso=> paso.step))
       }
     })
     // let recipesFilter = recipes100PI.filter(recipe => 
@@ -46,7 +48,7 @@ async function getAllRecipes(req, res){
          .json({msg:NO_RECIPE})
     else
       // res.json({recipesFilter})
-      res.json({recipes100PI})
+      res.json(recipes100PI)
 
   }catch(err){
     res.json({msg:err.message});
@@ -74,9 +76,12 @@ async function getRecipes(req, res){
       summary:recipe.data.summary,
       dishTypes:recipe.data.dishTypes.map(dish => dish),
       diets:recipe.data.diets.map(diet => diet),
-      steps:recipe.data.analyzedInstructions,
+      // steps:recipe.data.analyzedInstructions,
+      steps:recipe.analyzedInstructions.map(
+          analized=> analized.steps.map(
+            paso=> paso.step))
     }
-
+debugger;
     if(resultingRecipes){
       res.json(resultingRecipes);
     }else{
@@ -104,7 +109,7 @@ async function getRecipes(req, res){
           .json({msg: NO_RECIPE});
       }
     }catch(error){
-      res.json({msg: NO_RECIPE+' '+error.message})
+      res.json({msg: NO_RECIPE+', '+error.message})
     }
   }
 }
