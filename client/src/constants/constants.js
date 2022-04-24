@@ -6,4 +6,6 @@ export const SET_RECIPE = 'SET_RECIPE';
 export const RECIPES = 'recipes';//get recipes backend
 export const GET_RECIPES = 'GET_RECIPES';
 export const GET_RECIPE = 'GET_RECIPE';
-export const RECIPES_PER_PAGE = 9
+export const RECIPES_PER_PAGE = 9;
+export const FILTER_DIET = 'FILTER_DIET';
+export const SORT_NAME = 'SORT_NAME';

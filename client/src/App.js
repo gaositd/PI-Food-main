@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import { LandingPage } from './components/landing/langing';
 import { Home } from './components/home/home';
-import { Navbar } from './components/navbar/navbar';
 import { NewRecipe } from './components/newRecipe/newRecipe';
 import { Recipe } from './components/recipe/recipe';
 import { ErrorPage } from './components/errors/error';
@@ -11,7 +10,6 @@ import { ErrorPage } from './components/errors/error';
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Routes>
         <Route exact path='/' element={<LandingPage />} />
         <Route exact path='/home' element={<Home />} />

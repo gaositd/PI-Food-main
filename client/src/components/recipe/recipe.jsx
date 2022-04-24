@@ -46,11 +46,10 @@ export function Recipe(){
       </div>
       <div className="steps">
       <span className="font title mt">Step by Step</span>
-      {console.log(oneRecipe.steps)}
       <ol className="listStep">
         {
           oneRecipe.hasOwnProperty("steps") ?
-            oneRecipe.steps[0].map( (step, i) => <li key={i} className="font title listStep">{step}</li> ):
+            !!oneRecipe.steps.length && oneRecipe.steps[0].map( (step, i) => <li key={i} className="font title listStep">{step}</li> ):
             <span className="font title">{oneRecipe.steps}</span>
         }
       </ol>
