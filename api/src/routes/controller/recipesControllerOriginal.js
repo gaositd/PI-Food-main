@@ -4,10 +4,14 @@ const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../.
 // const WriteFile = require('../../routes/controller/writeFile.js')
 
 async function getAllRecipes(req, res){
-  const Search = req.query;
-  
+  const { Search } = req.query;
+  // WriteFile();
+  // console.log(req);
+  // res.send("Datos");
+  debugger;
+  if(Search) console.log(req);
+  debugger;
   try{
-    
     const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
@@ -23,13 +27,7 @@ async function getAllRecipes(req, res){
             paso=> paso.step))
       }
     })
-    if(Search.hasOwnProperty('Search')){
-      Search.search = Search.search.toLowerCase();
-      let recipesFilter = recipes100PI.filter(recipe => recipe.name.includes(Search.search));
-
-      recipes100 = [];
-      recipes100 = recipesFilter;
-    }
+    
     // let recipesFilter = recipes100PI.filter(recipe => 
     //   recipe.name.toLowerCase().includes(name.toLowerCase()));
     
