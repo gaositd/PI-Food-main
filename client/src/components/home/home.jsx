@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, } from 'react-router-dom';
 import {
   getRecipes,
+  sortBy,
 } from '../../action/allActions';
 import { Pagination } from "./pagination/pagination";
 import { RECIPES_PER_PAGE } from "../../constants/constants.js"
@@ -19,14 +20,20 @@ export function Home(){
   let recipes = useSelector(state =>state.allRecipes);
   useEffect(()=> dispatch(getRecipes()),[dispatch]);
 
+  let ordered = useSelector(state => state.byName);
+  useEffect(()=> dispatch(sortBy),[dispatch]);
+
   const diet = useSelector(state => state.filterDiet);
-  const byName = useSelector(state => state.byName);
+  // const byName = useSelector(state => state.byName);
   //use json file when apear message 402
-  if(recipes.hasOwnProperty("msg")){
-    recipes = [];
-    recipes = complexSearch;
+  
+  if(recipes){
+    if(recipes.hasOwnProperty("msg")){
+      recipes = [];
+      recipes = complexSearch;
+    }
   }
-  console.log(byName);
+  
   const newRecipes = recipes.filter(recipe =>{
      return recipe.diets.includes(diet.toLowerCase()); 
     }
@@ -35,7 +42,12 @@ export function Home(){
     recipes = [];
     recipes = newRecipes;
   }
-  
+
+  if(newRecipes.length > 0){
+    recipes = [];
+    recipes = newRecipes;
+  }
+
   let maxPages = Math.round(recipes.length / RECIPES_PER_PAGE);
 
   return(

@@ -3,7 +3,10 @@ import React, {
   // useState
 } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
+import {
+  // useSelector,
+  useDispatch,
+} from "react-redux";
 import { SelectOption } from "./selectOption/selectOption";
 import Glass from '../../images/magnifier.png';
 import { sortBy } from "../../action/allActions";
@@ -12,7 +15,7 @@ import './navbar.css';
 export function Navbar(){
   const history = useNavigate();
   let dispatch = useDispatch();
-  const byName = useSelector(state => state.byName);
+  // const byName = useSelector(state => state.byName);
 
   function handleButtom(){
     history('/newRecipe');
@@ -30,10 +33,10 @@ export function Navbar(){
       </section>
       <section className="navBar navbar-sideCenter">
         <div className="navbar-Sort">
-          <span className="text"> | </span>
+          {/* <span className="text"> | </span>
           <button id="dietUp" className="btnNavBar" value='dietUp' onClick={handleClick}>Up</button>
             <span className="text">Sort by diet</span>
-          <button id="dietDown" className="btnNavBar" onClick={handleClick}>Down</button> 
+          <button id="dietDown" className="btnNavBar" onClick={handleClick}>Down</button>  */}
           <span className="text"> | </span>
           <button id="healtUp" className="btnNavBar" onClick={handleClick}>Up</button>
           <span className="text">Sort by Healthy</span>

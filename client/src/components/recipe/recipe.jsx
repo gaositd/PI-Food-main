@@ -3,14 +3,20 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { getRecipe } from '../../action/allActions';
 import './recipe.css';
+import complexSearch from '../../json/recipes.json';
 
 export function Recipe(){
   const params = useParams();
   const id = parseInt(params.id);
   const dispatch = useDispatch();
-  const oneRecipe = useSelector(state => state.recipe);
+  let oneRecipe = useSelector(state => state.recipe);
   useEffect(()=> dispatch(getRecipe(id)),[dispatch, id]);
 
+  if(oneRecipe.hasOwnProperty("msg")){
+    oneRecipe = {};
+    oneRecipe = complexSearch.find(recipe => recipe.id === id);
+  }
+  
   return(
     <div className="recipeContainer">
       <div className="imageSummary">
