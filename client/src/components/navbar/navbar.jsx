@@ -2,17 +2,18 @@ import React, {
   useEffect,
   // useState
 } from "react";
-import { Link, useNavigate } from 'react-router-dom';
 import {
-  // useSelector,
-  useDispatch,
-} from "react-redux";
+  // Link,
+  useNavigate
+} from 'react-router-dom';
+import { /*useSelector,*/useDispatch } from "react-redux";
 import { SelectOption } from "./selectOption/selectOption";
-import Glass from '../../images/magnifier.png';
-import { sortBy } from "../../action/allActions";
+import { sortBy/*, getRecipes*/ } from "../../action/allActions";
+import { SearchRecipe } from './searchRecipe/searchRecipe'
 import './navbar.css';
 
 export function Navbar(){
+  // let text;
   const history = useNavigate();
   let dispatch = useDispatch();
   // const byName = useSelector(state => state.byName);
@@ -25,7 +26,7 @@ export function Navbar(){
     dispatch(sortBy(event.target.id));
   }
   useEffect(()=> dispatch(sortBy()),[dispatch]);
-  
+
   return(
     <header className="navbar-header">
       <section className="navBar navbar-sideLeft">
@@ -49,12 +50,13 @@ export function Navbar(){
         </div>
       </section>
       <section className="navBar navbar-sideRight">
-        <div className="searchNavBar">
-          <Link to="/home">
-            <img src={Glass} alt="Magnify glass" className="glass" height="25vh" />
+        {/* <div className="searchNavBar">
+          <Link to="">
+            <img src={Glass} alt="Magnify glass" className="glass" height="25vh" onClick={getText} />
           </Link>
-          <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" />
-        </div>
+          <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" onBlur={handleSendRecipes} />
+        </div> */}
+        <SearchRecipe />
         <button className="btnSearch" id="createRecipe" name="createRecipe" onClick={handleButtom}>
           Create Recipe
         </button>

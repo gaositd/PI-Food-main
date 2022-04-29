@@ -4,6 +4,7 @@ import { Link, } from 'react-router-dom';
 import {
   getRecipes,
   sortBy,
+  searchRecipes,
 } from '../../action/allActions';
 import { Pagination } from "./pagination/pagination";
 import { RECIPES_PER_PAGE } from "../../constants/constants.js"
@@ -20,7 +21,7 @@ export function Home(){
   let recipes = useSelector(state =>state.allRecipes);
   useEffect(()=> dispatch(getRecipes()),[dispatch]);
 
-  let ordered = useSelector(state => state.byName);
+  // let ordered = useSelector(state => state.byName);
   useEffect(()=> dispatch(sortBy),[dispatch]);
 
   const diet = useSelector(state => state.filterDiet);
@@ -38,15 +39,18 @@ export function Home(){
      return recipe.diets.includes(diet.toLowerCase()); 
     }
   );
+  
   if(newRecipes.length > 0){
     recipes = [];
     recipes = newRecipes;
   }
 
-  if(newRecipes.length > 0){
-    recipes = [];
-    recipes = newRecipes;
-  }
+  // useEffect(()=> dispatch(searchRecipes),[dispatch]);
+  const SearchRecipes = useSelector(state => state.searchRecipes);
+  // if(SearchRecipes.length > 0){
+  //   recipes = [];
+  //   recipes = SearchRecipes;
+  // }
 
   let maxPages = Math.round(recipes.length / RECIPES_PER_PAGE);
 

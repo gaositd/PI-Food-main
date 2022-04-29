@@ -2,7 +2,8 @@ import axios from "axios";
 import {
   SERVER_DIR, TYPES, GET_DIETS,
   POST_RECIPE, GET_RECIPES, RECIPES,
-  GET_RECIPE, FILTER_DIET, SORT_NAME
+  GET_RECIPE, FILTER_DIET, SORT_NAME,
+  SEARCH_RECIPES,
 } from '../constants/constants.js';
 
 //get all types of diets
@@ -60,6 +61,13 @@ function sortBy(sort){
   }
 }
 
+function searchRecipes(){
+  return {
+    type:SEARCH_RECIPES,
+    payload: searchRecipes
+  }
+}
+
 export {
   getDiets,
   setRecipe,
@@ -67,4 +75,5 @@ export {
   getRecipe,
   filterByDiet,
   sortBy,
+  searchRecipes
 };

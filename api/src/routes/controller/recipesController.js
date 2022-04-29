@@ -1,14 +1,13 @@
 const axios = require('axios');
 const { Recipe, DietType } = require('../../../src/db');
 const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../../constants/constant');
-// const WriteFile = require('../../routes/controller/writeFile.js')
 
 async function getAllRecipes(req, res){
   const Search = req.query;
   
   try{
     
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY0}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -30,8 +29,6 @@ async function getAllRecipes(req, res){
       recipes100 = [];
       recipes100 = recipesFilter;
     }
-    // let recipesFilter = recipes100PI.filter(recipe => 
-    //   recipe.name.toLowerCase().includes(name.toLowerCase()));
     
     const dbRecipes = await Recipe.findAll({
       include:{
@@ -43,14 +40,11 @@ async function getAllRecipes(req, res){
       },
     });
   
-    // recipesFilter = recipesFilter.concat(dbRecipes);
-    // if(recipesFilter.length === 0)
     recipes100PI = recipes100PI.concat(dbRecipes);
     if(recipes100.length === 0)
       res.status(404)
          .json({msg:NO_RECIPE})
     else
-      // res.json({recipesFilter})
       res.json(recipes100PI)
 
   }catch(err){

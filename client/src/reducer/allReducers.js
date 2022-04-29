@@ -2,7 +2,8 @@ import {
   GET_DIETS, GET_RECIPES, SET_RECIPE,
   GET_RECIPE, FILTER_DIET, SORT_NAME,
   DIET_UP, /*DIET_DOWN,*/ HEALT_UP,
-  HEALT_DOWN, FILTER_SCORE, NAME_UP, NAME_DOWN
+  HEALT_DOWN, FILTER_SCORE, NAME_UP,
+  NAME_DOWN, SEARCH_RECIPES, 
 } from'../constants/constants.js';
 const initialState ={
   allDiets:[],
@@ -11,6 +12,7 @@ const initialState ={
   recipe:{},
   filterDiet:'',
   byName:[],
+  searchRecipes:{},
 };
 
 const routeReducer = (state = initialState, action) => {
@@ -36,6 +38,11 @@ const routeReducer = (state = initialState, action) => {
       return {
         ...state,
         saveRecipe:action.payload,
+      }
+    case SEARCH_RECIPES:
+      return{
+        ...state,
+        searchRecipes:action.payload,
       }
     case FILTER_DIET:{
       return {

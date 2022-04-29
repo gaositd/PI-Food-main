@@ -16,3 +16,4 @@ export const HEALT_DOWN = 'healtDown';
 export const SORT_NAME = 'SORT_NAME';
 export const NAME_UP = 'nameUp';
 export const NAME_DOWN = 'nameDown';
+export const SEARCH_RECIPES = 'SEARCH_RECIPES';
