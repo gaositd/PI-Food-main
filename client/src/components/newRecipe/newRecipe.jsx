@@ -11,19 +11,36 @@ import './newRecipe.css';
 
 export function validate(input) {
   let errors = {};
+  const numbersRegex = RegExp(/[0-9]{3}/);
+  const urlRegex = RegExp( /^(ftp|http|https):\/\/[^ "]+$/);
   
   if(!input.dishName){
-    errors.dishName = " Please enter a name of dishname ";
+    errors.dishName = "Please enter a recipe name";
   }else if(input.dishName.length < 4){
-    errors.dishName = " Please enter a valid name of dishname ";
+    errors.dishName = "Please enter a valid dishname name";
   }
 
   if(!input.summary){
-    errors.summary = " Please enter a summary ";
+    errors.summary = "Please enter a summary ";
   }else if(input.summary.length <= 40){
-    errors.summary = " Please enter a valid summary of dish ";
+    errors.summary = "Please enter a valid dish summary";
   }
 
+  if(input.healthy){
+    if(!numbersRegex.test(input.healthy)){
+      errors.healthy = "Please enter a health number between 0 and 100"
+    }
+  }
+
+  if(input.picture){
+    if(!urlRegex.test(input.picture)){
+      errors.picture = "Please enter a valid picture URL"
+    }
+  }
+
+  if(!numbersRegex.test(input.score)){
+    errors.healthy = " Please enter a score number between 0 and 100"
+  }
   return errors;
 }
 
@@ -46,14 +63,24 @@ export function NewRecipe(){
   }
 
   function handleSubmit(event){
-    event.preventDefault();
+    if(errors || !errors.hasOwnProperty("dishName") || !errors.hasOwnProperty("summary")){
+      alert('No submited, check mandatory fields (*)');
+      event.preventDefault();
+      return;
+    }
+    
+    const sendRecipe={
+
+    };
+    
   }
 
   return(
     <main className="mainPage">
-      <form className="form" onSubmit={handleSubmit} >
+      {/* <form className="form" onSubmit={handleSubmit} > */}
+      <form className="form" >
         <div className="labelInput">
-          <label htmlFor="dishName" className="text">Dish Name *</label>
+          <label htmlFor="dishName" className="text">Recipe Name *</label>
             <input
               className={!errors ? errors.dishName & 'error' :'inputText'}
               type="text"
@@ -98,6 +125,7 @@ export function NewRecipe(){
               min="0"
               max="100"
               placeholder="Healthy level 1 to 100"
+              onChange={handleInputChange}
             />
         </div>
         <div className="labelInput">
@@ -120,6 +148,7 @@ export function NewRecipe(){
               min="0"
               max="100"
               placeholder="Score 1 to 100"
+              onChange={handleInputChange}
             />
         </div>
         <div>
@@ -131,6 +160,7 @@ export function NewRecipe(){
           <button
             type="submit"
             className="btn btn-large"
+            onClick={handleSubmit}
           >
             Send Recipe
           </button>

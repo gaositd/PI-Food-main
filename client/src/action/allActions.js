@@ -39,11 +39,11 @@ function getRecipe(id){
     }
   }
 }
-//data in server
+//send to server
 function setRecipe(data){
   axios.post(`${SERVER_DIR}${POST_RECIPE}`)
        .then(res => res.data)
-      //  .catch(err =>{msg: `${err.message}`});
+       .catch(err => ({ type: POST_RECIPE, payload: err.message }));
 }
 
 //filter and order data
@@ -75,5 +75,5 @@ export {
   getRecipe,
   filterByDiet,
   sortBy,
-  recipesByWord
+  recipesByWord,
 };

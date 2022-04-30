@@ -1,9 +1,9 @@
 import {
   GET_DIETS, GET_RECIPES, SET_RECIPE,
   GET_RECIPE, FILTER_DIET, SORT_NAME,
-  /*DIET_UP, DIET_DOWN,*/ HEALT_UP,
-  HEALT_DOWN, FILTER_SCORE, NAME_UP,
-  NAME_DOWN, SEARCH_RECIPES, 
+  HEALT_UP, HEALT_DOWN, FILTER_SCORE,
+  NAME_UP, NAME_DOWN, SEARCH_RECIPES,
+  POST_RECIPE
 } from'../constants/constants.js';
 const initialState ={
   allDiets:[],
@@ -116,6 +116,11 @@ const routeReducer = (state = initialState, action) => {
       }
       break;
     }
+    case POST_RECIPE:
+      return{
+        ...state,
+        setRecipe:action.payload,
+      }
     default:
       return state;
   }
