@@ -7,10 +7,8 @@ async function getAllRecipes(req, res){
   const { Search } = req.query;
   // WriteFile();
   // console.log(req);
-  // res.send("Datos");
-  debugger;
   if(Search) console.log(req);
-  debugger;
+  
   try{
     const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{

@@ -1,7 +1,7 @@
 import {
   GET_DIETS, GET_RECIPES, SET_RECIPE,
   GET_RECIPE, FILTER_DIET, SORT_NAME,
-  DIET_UP, /*DIET_DOWN,*/ HEALT_UP,
+  /*DIET_UP, DIET_DOWN,*/ HEALT_UP,
   HEALT_DOWN, FILTER_SCORE, NAME_UP,
   NAME_DOWN, SEARCH_RECIPES, 
 } from'../constants/constants.js';
@@ -12,7 +12,7 @@ const initialState ={
   recipe:{},
   filterDiet:'',
   byName:[],
-  searchRecipes:{},
+  recipesByWord:[],
 };
 
 const routeReducer = (state = initialState, action) => {
@@ -40,9 +40,15 @@ const routeReducer = (state = initialState, action) => {
         saveRecipe:action.payload,
       }
     case SEARCH_RECIPES:
+      let searchRecipes;
+      if(action.payload){
+        searchRecipes = state.allRecipes.filter(recipe =>{
+          return recipe.name.toLowerCase().includes(action.payload);
+        });
+      }
       return{
         ...state,
-        searchRecipes:action.payload,
+        recipesByWord:searchRecipes,
       }
     case FILTER_DIET:{
       return {
@@ -70,7 +76,6 @@ const routeReducer = (state = initialState, action) => {
       }//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
       if(action.payload === NAME_DOWN){
         const {allRecipes} = state;
-        // console.log(allRecipes);
         return {
           ...state,
           byName:allRecipes
@@ -86,9 +91,10 @@ const routeReducer = (state = initialState, action) => {
           )
         }
       }
+      break;
     }
     case FILTER_SCORE:{
-      const {allRecipes} = state;
+      //const {allRecipes} = state;
       if(action.payload === HEALT_UP){
         return{
           ...state,

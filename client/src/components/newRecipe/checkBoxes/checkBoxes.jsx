@@ -10,7 +10,6 @@ export function Checkboxes() {
   const dispatch = useDispatch();
   const diets = useSelector(state => state.allDiets);
   useEffect(()=> dispatch(getDiets()),[dispatch]);
-  // console.log('console.log(diets)');
 
   return (
     <React.Fragment>

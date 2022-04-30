@@ -61,7 +61,7 @@ function sortBy(sort){
   }
 }
 
-function searchRecipes(){
+function recipesByWord(searchRecipes){
   return {
     type:SEARCH_RECIPES,
     payload: searchRecipes
@@ -75,5 +75,5 @@ export {
   getRecipe,
   filterByDiet,
   sortBy,
-  searchRecipes
+  recipesByWord
 };

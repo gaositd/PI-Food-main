@@ -1,11 +1,12 @@
 .landing{
   display:flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .love{
   color: white;
   font-size: 6rem;
-  margin-right: 40vw;
 }
 .btn{
   background-color:black;

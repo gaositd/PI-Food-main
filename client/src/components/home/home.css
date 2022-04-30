@@ -22,3 +22,8 @@
 .recipeCard:hover{
   opacity: 1;
 }
+.textTitle{
+  font-size: 2vh;
+  color: white;
+  margin: auto 0.1vw;
+}
