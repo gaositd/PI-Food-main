@@ -6,7 +6,7 @@ const crypto = require('crypto');
 async function createRecipe(req, res){
   const { name, image, healthScore, summary, healthyLevel, diets, steps } = req.body;
 
-  const data ={
+  const data = {
     id: crypto.randomUUID(),
     name,
     image,
@@ -15,13 +15,17 @@ async function createRecipe(req, res){
     healthyLevel,
     diets,
     steps,
-    createInDb:true,
+    createInDb: true,
   };
 
-  Recipe.create(data);
-  res.status(201)
-      .json({msg: DATA_LOAD})
-    
+  try{
+    await Recipe.create(data);
+    // await Recipe.setRecipes(diets);
+    res.status(201)
+        .json({msg: DATA_LOAD});
+  }catch(err){
+    res.json({msg:err.message});
+  }
 };
 
 module.exports = createRecipe;

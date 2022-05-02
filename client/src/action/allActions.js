@@ -40,10 +40,16 @@ function getRecipe(id){
   }
 }
 //send to server
-function setRecipe(data){
-  axios.post(`${SERVER_DIR}${POST_RECIPE}`)
-       .then(res => res.data)
-       .catch(err => ({ type: POST_RECIPE, payload: err.message }));
+function setRecipe(recipe){
+  return async function(){
+    try{
+      const res = await axios.post(`${SERVER_DIR}${POST_RECIPE}`,recipe);
+      return res;
+    }
+    catch (err) {
+      return ({ type: POST_RECIPE, payload: err.message });
+    }
+  }
 }
 
 //filter and order data

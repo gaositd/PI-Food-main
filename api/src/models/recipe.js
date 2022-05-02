@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       default:'https://images.vexels.com/media/users/3/249295/isolated/lists/6b84c3546f5ab87ecf81c577245c13ae-ramen-svg-2-1.png',
       comment:'https://www.freepng.es/png-vft0iv/download.html'
     },
-    healthScore:{
+    healthyLevel:{
       type: DataTypes.FLOAT,
       default:0.00,
     },
@@ -30,15 +30,15 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    healthyLevel:{
+    healthScore:{
       type: DataTypes.FLOAT,
       default:0.00,
     },
-    stepByStep:{
+    steps:{
       type: DataTypes.TEXT,
     },
-    dietType:{
-      type: DataTypes.INTEGER,
+    diets:{
+      type: DataTypes.TEXT,
     },
     createInDb:{
       type: DataTypes.BOOLEAN,

@@ -1,47 +1,72 @@
 import React, {
   useState,
-  // useEffect,
 } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { setRecipe } from '../../action/allActions.js';
+import { setRecipe } from '../../action/allActions.js';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Checkboxes } from "./checkBoxes/checkBoxes";
 import './newRecipe.css';
-// import { ErrorPopUp } from "../error/error";
-// import crypto from 'crypto';
 
+let sendRecipe = {
+  name:"",
+  summary:"",
+  healthyLevel:0,
+  image:"",
+  healthScore:0,
+  steps:"",
+  diets:"",
+};
 export function validate(input) {
   let errors = {};
-  const numbersRegex = RegExp(/[0-9]{3}/);
+  
+  const numbersRegex = RegExp(/^[1-9][0-9]?$|^100/);
   const urlRegex = RegExp( /^(ftp|http|https):\/\/[^ "]+$/);
   
   if(!input.dishName){
     errors.dishName = "Please enter a recipe name";
   }else if(input.dishName.length < 4){
     errors.dishName = "Please enter a valid dishname name";
+  }else{
+    sendRecipe.name = input.dishName;
   }
 
   if(!input.summary){
     errors.summary = "Please enter a summary ";
   }else if(input.summary.length <= 40){
     errors.summary = "Please enter a valid dish summary";
+  }else{
+    sendRecipe.summary = input.summary;
+  }
+
+  if(input.steps){
+    sendRecipe.steps = input.steps;
   }
 
   if(input.healthy){
     if(!numbersRegex.test(input.healthy)){
       errors.healthy = "Please enter a health number between 0 and 100"
+    }else{
+      sendRecipe.healthyLevel = input.healthy;
     }
   }
 
   if(input.picture){
     if(!urlRegex.test(input.picture)){
       errors.picture = "Please enter a valid picture URL"
+    }else{
+      sendRecipe.image = input.picture;
     }
   }
 
-  if(!numbersRegex.test(input.score)){
-    errors.healthy = " Please enter a score number between 0 and 100"
+  if(!numbersRegex.test(input.healthScore)){
+    errors.score = " Please enter a score number between 0 and 100"
+  }else{
+    sendRecipe.healthScore = input.healthScore;
   }
+  
+  sendRecipe.diets = "";
   return errors;
+  
 }
 
 export function NewRecipe(){
@@ -50,6 +75,9 @@ export function NewRecipe(){
     summary:'',
   });
   const [errors, setErrors] = useState({});
+
+  const history = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange =(event)=>{
     setInput({
@@ -63,15 +91,15 @@ export function NewRecipe(){
   }
 
   function handleSubmit(event){
-    if(errors || !errors.hasOwnProperty("dishName") || !errors.hasOwnProperty("summary")){
-      alert('No submited, check mandatory fields (*)');
+    if(errors.length > 0){
+      alert('No submited, check fields');
       event.preventDefault();
       return;
+    }else{
+      dispatch(setRecipe(sendRecipe));
+      alert("Recipe was saved");
+      history('/home');
     }
-    
-    const sendRecipe={
-
-    };
     
   }
 
@@ -113,7 +141,15 @@ export function NewRecipe(){
         </div>
         <div className="labelInput">
           <label htmlFor="steps" className="text">Recipe step by step</label>
-            <textarea className="txtArea" name="steps" id="steps" placeholder="Recipe step by step" cols="46" rows="5"/>
+            <textarea
+              className="txtArea"
+              name="steps"
+              id="steps"
+              placeholder="Recipe step by step"
+              cols="46"
+              rows="5"
+              onChange={handleInputChange}
+            />
         </div>
         <div className="labelInput">
           <label htmlFor="healthy" className="text">Healthy level</label>
@@ -136,6 +172,7 @@ export function NewRecipe(){
             name="picture"
             className="inputText"
             placeholder="example path https://www.myImage.com/food.png"
+            onChange={handleInputChange}
           />  
         </div>
         <div className="labelInput">
@@ -143,8 +180,8 @@ export function NewRecipe(){
             <input
               className="inputText"
               type="number"
-              id="score"
-              name="score"
+              id="healthScore"
+              name="healthScore"
               min="0"
               max="100"
               placeholder="Score 1 to 100"

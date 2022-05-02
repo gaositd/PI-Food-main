@@ -16,5 +16,6 @@ module.exports ={
   BYPK,
   LOAD_ERROR,
   NOT_FOUND,
-  NOT_CREATE_ERROR
+  NOT_CREATE_ERROR,
+  DATA_LOAD,
 }

@@ -4,7 +4,7 @@ const { NO_RECIPE, NO_PARAMETER, SPOONACULAR, RECIPES100, BYPK } = require('../.
 
 async function getAllRecipes(req, res){
   const Search = req.query;
-  
+  let arrAux = [];  
   try{
     
     const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
@@ -40,7 +40,13 @@ async function getAllRecipes(req, res){
       },
     });
   
-    recipes100PI = recipes100PI.concat(dbRecipes);
+    if(dbRecipes.length > 0){
+      arrAux = recipes100PI.concat(dbRecipes.map(recipe =>{
+        return(
+          diets, recipe.createInDb, recipe.healtScore, recipe.healthyLevel, recipe.id, recipe.image, recipe.name, recipe.steps, recipe.summary
+        )}));
+      recipes100PI = arrAux;
+    }
     if(recipes100.length === 0)
       res.status(404)
          .json({msg:NO_RECIPE})

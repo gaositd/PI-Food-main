@@ -6,7 +6,6 @@ import { getDiets } from '../../../action/allActions';
 import './checkboxes.css';
 
 export function Checkboxes() {
-  // const [select, setSelect] = useState([]);
   const dispatch = useDispatch();
   const diets = useSelector(state => state.allDiets);
   useEffect(()=> dispatch(getDiets()),[dispatch]);
