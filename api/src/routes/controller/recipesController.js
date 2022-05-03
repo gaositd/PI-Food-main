@@ -7,7 +7,7 @@ async function getAllRecipes(req, res){
   let arrAux = [];  
   try{
     
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=5&apiKey=${process.env.APIKEY}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -41,11 +41,9 @@ async function getAllRecipes(req, res){
     });
   
     if(dbRecipes.length > 0){
-      arrAux = recipes100PI.concat(dbRecipes.map(recipe =>{
-        return(
-          diets, recipe.createInDb, recipe.healtScore, recipe.healthyLevel, recipe.id, recipe.image, recipe.name, recipe.steps, recipe.summary
-        )}));
-      recipes100PI = arrAux;
+      
+      recipes100PI = recipes100PI.concat(dbRecipes);
+      // recipes100PI = arrAux;
     }
     if(recipes100.length === 0)
       res.status(404)
@@ -61,7 +59,10 @@ async function getAllRecipes(req, res){
 
 async function getRecipes(req, res){
   const { id } = req.params;
+  let resultingRecipes = {};
 
+  if(id) fromDB(resultingRecipes, res, id);
+  
   try{
     const recipe = await axios.get(`${SPOONACULAR}${id}${BYPK}`);
 
@@ -79,30 +80,6 @@ async function getRecipes(req, res){
             paso=> paso.step))
     }
 
-    if (id.length > 6) {
-      try {
-        const dbRecipes = await Recipe.findByPk(id, {
-          include: {
-            model: DietType,
-            atributes: ['id'],
-            through: {
-              atributes: [],
-            },
-          },
-        });
-  
-        if (dbRecipes) {
-          res.json(dbRecipes);
-        } else {
-          res.status(404)
-            .json({ msg: NO_RECIPE });
-        }
-      } catch (error) {
-        res.json({ msg: NO_RECIPE + ', ' + error.message })
-      }
-      resultingRecipes = resultingRecipes.concat(dbRecipes);
-    }
-    
     if(resultingRecipes){
       res.json(resultingRecipes);
     }else{
@@ -113,6 +90,31 @@ async function getRecipes(req, res){
   }catch(error){
     res.json({msg: NO_RECIPE+', '+error.message})
   }
+}
+
+async function fromDB(res, id) {
+  
+    try {
+      const dbRecipes = await Recipe.findByPk(id, {
+        include: {
+          model: DietType,
+          atributes: ['id'],
+          through: {
+            atributes: [],
+          },
+        },
+      });
+
+      if (dbRecipes) {
+        res.json(dbRecipes);
+      } else {
+        res.status(404)
+          .json({ msg: NO_RECIPE });
+      }
+    } catch (error) {
+      res.json({ msg: NO_RECIPE + ', ' + error.message })
+    }
+    resultingRecipes = resultingRecipes.concat(dbRecipes);
 }
 
 module.exports = {

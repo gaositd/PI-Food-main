@@ -7,7 +7,8 @@ async function createRecipe(req, res){
   const { name, image, healthScore, summary, healthyLevel, diets, steps } = req.body;
 
   const data = {
-    id: crypto.randomUUID(),
+    // id: crypto.randomUUID(),
+    id:null,
     name,
     image,
     healthScore,
