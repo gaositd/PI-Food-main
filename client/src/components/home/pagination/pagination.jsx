@@ -69,7 +69,7 @@ export function Pagination({currentPage, setCurrentPage, maxPages, totalRecipes}
                 key={page}
                 className="numPage"
                 onClick={(page) =>paginate(page)}>
-                  {page+"·"}
+                  {"·"+page+"·"}
               </Link>
             )
           })

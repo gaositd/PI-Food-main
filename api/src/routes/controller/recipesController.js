@@ -7,7 +7,7 @@ async function getAllRecipes(req, res){
   let arrAux = [];  
   try{
     
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=5&apiKey=${process.env.APIKEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=5&apiKey=${process.env.APIKEY0}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,
@@ -42,8 +42,23 @@ async function getAllRecipes(req, res){
   
     if(dbRecipes.length > 0){
       
-      recipes100PI = recipes100PI.concat(dbRecipes);
+      // recipes100PI = recipes100PI.concat(dbRecipes);
       // recipes100PI = arrAux;
+      arrAux = dbRecipes.map(recipe =>{
+        return({
+          id: recipe.id,
+          name: recipe.name,
+          image: recipe.image,
+          healthyLevel:recipe.healthyLevel,
+          summary:recipe.summary,
+          healthScore:recipe.healthScore,
+          steps:recipe.steps,
+          diets:recipe.diets,
+          dishTypes:"",
+          createInDb:recipe.createInDb
+        })
+      });
+      recipes100PI = recipes100PI.concat(arrAux);
     }
     if(recipes100.length === 0)
       res.status(404)
@@ -92,7 +107,7 @@ async function getRecipes(req, res){
   }
 }
 
-async function fromDB(res, id) {
+async function fromDB(resultingRecipes, res, id) {
   
     try {
       const dbRecipes = await Recipe.findByPk(id, {
@@ -106,15 +121,28 @@ async function fromDB(res, id) {
       });
 
       if (dbRecipes) {
-        res.json(dbRecipes);
-      } else {
+        
+        resultingRecipes = {
+          id:dbRecipes.id,
+          name:dbRecipes.name,
+          image:dbRecipes.image,
+          score:dbRecipes.healthScore,
+          healthScore:dbRecipes.healthyLevel,
+          summary:dbRecipes.summary,
+          dishTypes:dbRecipes.dishTypes,
+          diets:"Omnivore",/*dbRecipes.diets,*/
+          steps:dbRecipes.steps,
+          createInDb:dbRecipes.createInDb,
+        }
+        res.json(resultingRecipes);
         res.status(404)
-          .json({ msg: NO_RECIPE });
+           .json({ msg: NO_RECIPE });
+      } else {
       }
     } catch (error) {
-      res.json({ msg: NO_RECIPE + ', ' + error.message })
+      // res.json({ msg: NO_RECIPE + ', ' + error.message })
     }
-    resultingRecipes = resultingRecipes.concat(dbRecipes);
+   // resultingRecipes = resultingRecipes.concat(dbRecipes);
 }
 
 module.exports = {

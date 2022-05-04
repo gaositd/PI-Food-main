@@ -35,15 +35,19 @@ export function Home(){
     }
   }
   
-  const newRecipes = recipes.filter(recipe =>{
-     return recipe.diets.includes(diet.toLowerCase()); 
+  let newRecipes = {};
+  if(diet){
+    newRecipes = recipes.filter(recipe =>{
+      return recipe.diets.toLowerCase().includes(diet.toLowerCase()); 
+      }
+    );
+
+    if(newRecipes.length > 0){
+      recipes = [];
+      recipes = newRecipes;
     }
-  );
-  
-  if(newRecipes.length > 0){
-    recipes = [];
-    recipes = newRecipes;
   }
+  
 
   const SearchRecipe = useSelector(state => state.recipesByWord);
   if(SearchRecipe.length > 0){
