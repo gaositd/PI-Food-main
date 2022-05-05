@@ -3,7 +3,7 @@ import {
   GET_RECIPE, FILTER_DIET, SORT_NAME,
   HEALT_UP, HEALT_DOWN, FILTER_SCORE,
   NAME_UP, NAME_DOWN, SEARCH_RECIPES,
-  POST_RECIPE
+  POST_RECIPE, SEND_DIETS, 
 } from'../constants/constants.js';
 const initialState ={
   allDiets:[],
@@ -13,6 +13,7 @@ const initialState ={
   filterDiet:'',
   byName:[],
   recipesByWord:[],
+  sendDiets:[]
 };
 
 const routeReducer = (state = initialState, action) => {
@@ -120,6 +121,11 @@ const routeReducer = (state = initialState, action) => {
       return{
         ...state,
         setRecipe:action.payload,
+      }
+    case SEND_DIETS:
+      return{
+        ...state,
+        sendDiets:action.payload
       }
     default:
       return state;

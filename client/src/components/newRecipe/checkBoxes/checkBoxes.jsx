@@ -1,9 +1,11 @@
 import React, {
-  useState,
   useEffect,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDiets } from '../../../action/allActions';
+import {
+  getDiets,
+  sendDiets,
+ } from '../../../action/allActions';
 import './checkboxes.css';
 
 export function Checkboxes() {
@@ -11,25 +13,15 @@ export function Checkboxes() {
   const diets = useSelector(state => state.allDiets);
   useEffect(()=> dispatch(getDiets()),[dispatch]);
 
-  const [checkboxes,setCheckboxes] = useState({})
   let checks = [];
+  useEffect(()=> dispatch(sendDiets()),[checks]);
 
   function handleCheckChange(e){
-    // console.log(e.target.checked);
-    // console.log(e.target.value);
-    // return {
-    //   ...checkboxes,
-    //   [e.target.checked] : true,
-    // }
     if(!checks.includes(e.target.value)){
       checks.push(e.target.value);
     }else{
       checks = checks.filter(check => check !== e.target.value);
     }
-  }
-
-  function handleBlur(){
-    // console.log(checkboxes)
   }
 
   return (
@@ -49,7 +41,6 @@ export function Checkboxes() {
                 value={diet.name}
                 name={diet.ID}
                 onChange={handleCheckChange}
-                onBlur={handleBlur}
               />
             </div>
           </div>

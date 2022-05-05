@@ -7,7 +7,7 @@ async function getAllRecipes(req, res){
   let arrAux = [];  
   try{
     
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=5&apiKey=${process.env.APIKEY0}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY0}`);
     let recipes100PI = recipes100.data.results.map(recipe =>{
       return{
         id:recipe.id,

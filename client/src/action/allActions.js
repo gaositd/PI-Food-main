@@ -3,7 +3,7 @@ import {
   SERVER_DIR, TYPES, GET_DIETS,
   POST_RECIPE, GET_RECIPES, RECIPES,
   GET_RECIPE, FILTER_DIET, SORT_NAME,
-  SEARCH_RECIPES,
+  SEARCH_RECIPES, SEND_DIETS, 
 } from '../constants/constants.js';
 
 //get all types of diets
@@ -74,6 +74,13 @@ function recipesByWord(searchRecipes){
   }
 }
 
+function sendDiets(diets){
+  return {
+    type:SEND_DIETS,
+    payload: diets
+  }
+}
+
 export {
   getDiets,
   setRecipe,
@@ -82,4 +89,5 @@ export {
   filterByDiet,
   sortBy,
   recipesByWord,
+  sendDiets,
 };

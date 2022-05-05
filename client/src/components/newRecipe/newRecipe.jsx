@@ -2,7 +2,7 @@ import React, {
   useState,
 } from "react";
 import { setRecipe } from '../../action/allActions.js';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Checkboxes } from "./checkBoxes/checkBoxes";
 import './newRecipe.css';
@@ -16,7 +16,8 @@ let sendRecipe = {
   steps:"",
   diets:"",
 };
-export function validate(input) {
+export function validate(input, dietsDB) {
+  // const dietsDB = useSelector(state =>state.sendDiets);
   let errors = {};
   
   const numbersRegex = RegExp(/^[1-9][0-9]?$|^100/);
@@ -56,6 +57,8 @@ export function validate(input) {
     }else{
       sendRecipe.image = input.picture;
     }
+  }else{
+    sendRecipe.image = "https://static.wixstatic.com/media/44e15e_07f8ad9e95f240fda9e67ba90a986899~mv2.jpg/v1/fit/w_2500,h_1330,al_c/44e15e_07f8ad9e95f240fda9e67ba90a986899~mv2.jpg";
   }
 
   if(!numbersRegex.test(input.healthScore)){
@@ -63,6 +66,8 @@ export function validate(input) {
   }else{
     sendRecipe.healthScore = input.healthScore;
   }
+
+  if(dietsDB) sendRecipe.diets = dietsDB;
   
   sendRecipe.diets = "";
   return errors;
@@ -75,10 +80,9 @@ export function NewRecipe(){
     summary:'',
   });
   const [errors, setErrors] = useState({});
-
   const history = useNavigate();
   const dispatch = useDispatch();
-
+  const dietsDB = useSelector(state =>state.sendDiets);
   const handleInputChange =(event)=>{
     setInput({
       ...input,
@@ -87,7 +91,7 @@ export function NewRecipe(){
     setErrors(validate({
       ...input,
       [event.target.name]: event.target.value,
-    }));
+    }, dietsDB));
   }
 
   function handleSubmit(event){

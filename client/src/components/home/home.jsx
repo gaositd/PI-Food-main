@@ -4,7 +4,6 @@ import { Link, } from 'react-router-dom';
 import {
   getRecipes,
   sortBy,
-  // recipesByWord,
 } from '../../action/allActions';
 import { Pagination } from "./pagination/pagination";
 import { RECIPES_PER_PAGE } from "../../constants/constants.js"
@@ -48,7 +47,6 @@ export function Home(){
     }
   }
   
-
   const SearchRecipe = useSelector(state => state.recipesByWord);
   if(SearchRecipe.length > 0){
     recipes = SearchRecipe;
