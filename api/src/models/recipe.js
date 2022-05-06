@@ -42,6 +42,9 @@ module.exports = (sequelize) => {
     diets:{
       type: DataTypes.TEXT,
     },
+    dishType:{
+      type:DataTypes.TEXT,
+    },
     createInDb:{
       type: DataTypes.BOOLEAN,
       default:true,

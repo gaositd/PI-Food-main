@@ -121,7 +121,8 @@ async function fromDB(resultingRecipes, res, id) {
       });
 
       if (dbRecipes) {
-        
+        const arrDiets = dbRecipes.diets.split(',');
+        const arrDishes = dbRecipes.dishes.split(',');
         resultingRecipes = {
           id:dbRecipes.id,
           name:dbRecipes.name,
@@ -129,8 +130,8 @@ async function fromDB(resultingRecipes, res, id) {
           score:dbRecipes.healthScore,
           healthScore:dbRecipes.healthyLevel,
           summary:dbRecipes.summary,
-          dishTypes:dbRecipes.dishTypes,
-          diets:"Omnivore",/*dbRecipes.diets,*/
+          dishTypes:arrDishes,
+          diets:arrDiets,
           steps:dbRecipes.steps,
           createInDb:dbRecipes.createInDb,
         }

@@ -1,10 +1,14 @@
 import React, {
   useState,
+  useEffect,
 } from "react";
-import { setRecipe } from '../../action/allActions.js';
+import {
+  setRecipe,
+  getDiets,
+} from '../../action/allActions.js';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Checkboxes } from "./checkBoxes/checkBoxes";
+// import { Checkboxes } from "./checkBoxes/checkBoxes";
 import './newRecipe.css';
 
 let sendRecipe = {
@@ -13,11 +17,12 @@ let sendRecipe = {
   healthyLevel:0,
   image:"",
   healthScore:0,
+  dishType:"",
   steps:"",
   diets:"",
 };
-export function validate(input, dietsDB) {
-  // const dietsDB = useSelector(state =>state.sendDiets);
+let checks = [];
+export function validate(input, checks) {
   let errors = {};
   
   const numbersRegex = RegExp(/^[1-9][0-9]?$|^100/);
@@ -61,15 +66,18 @@ export function validate(input, dietsDB) {
     sendRecipe.image = "https://static.wixstatic.com/media/44e15e_07f8ad9e95f240fda9e67ba90a986899~mv2.jpg/v1/fit/w_2500,h_1330,al_c/44e15e_07f8ad9e95f240fda9e67ba90a986899~mv2.jpg";
   }
 
+  if(input.dishType){
+    sendRecipe.dishType = input.dishType;
+  }
+  
   if(!numbersRegex.test(input.healthScore)){
     errors.score = " Please enter a score number between 0 and 100"
   }else{
     sendRecipe.healthScore = input.healthScore;
   }
 
-  if(dietsDB) sendRecipe.diets = dietsDB;
+  if(checks) {console.log(checks); sendRecipe.diets = checks;}
   
-  sendRecipe.diets = "";
   return errors;
   
 }
@@ -82,7 +90,6 @@ export function NewRecipe(){
   const [errors, setErrors] = useState({});
   const history = useNavigate();
   const dispatch = useDispatch();
-  const dietsDB = useSelector(state =>state.sendDiets);
   const handleInputChange =(event)=>{
     setInput({
       ...input,
@@ -91,21 +98,37 @@ export function NewRecipe(){
     setErrors(validate({
       ...input,
       [event.target.name]: event.target.value,
-    }, dietsDB));
+    }, checks.toString()));
+  }
+  const dietsCheckBox = useSelector(state => state.allDiets);
+  
+  useEffect(()=> dispatch(getDiets()),[dispatch]);
+
+  function handleCheckChange(e){
+    if(!checks.includes(e.target.value)){
+      checks.push(e.target.value);
+    }else{
+      checks = checks.filter(check => check !== e.target.value);
+    }
+    sendRecipe.diets = checks.toString();
+    console.log(checks);
   }
 
   function handleSubmit(event){
-    if(errors.length > 0){
-      alert('No submited, check fields');
-      event.preventDefault();
-      return;
-    }else{
-      dispatch(setRecipe(sendRecipe));
-      alert("Recipe was saved");
-      history('/home');
-    }
-    
+
+
+  // if(errors.length > 0){
+  if(!input.dishName || !input.summary){
+    alert('No submited, check mandatory fields');
+    event.preventDefault();
+    return;
+  }else{
+    dispatch(setRecipe(sendRecipe));
+    alert("Recipe was savedRecipe was saved, it will be redirected to home page.");
+    history('/home');
   }
+  
+}
 
   return(
     <main className="mainPage">
@@ -169,17 +192,6 @@ export function NewRecipe(){
             />
         </div>
         <div className="labelInput">
-        <label htmlFor="healthy" className="text">Load a Image from URL</label>
-          <input
-            type="text"
-            id="picture"
-            name="picture"
-            className="inputText"
-            placeholder="example path https://www.myImage.com/food.png"
-            onChange={handleInputChange}
-          />  
-        </div>
-        <div className="labelInput">
           <label htmlFor="score" className="text">Score Recipe</label>
             <input
               className="inputText"
@@ -192,9 +204,54 @@ export function NewRecipe(){
               onChange={handleInputChange}
             />
         </div>
+        <div className="labelInput">
+
+        <label htmlFor="healthy" className="text">Dish Type</label>
+          <input
+            type="text"
+            id="dishType"
+            name="dishType"
+            className="inputText"
+            placeholder="Dish type names separated by commas (pate, casserole, spoon)"
+            onChange={handleInputChange}
+          />  
+        </div>
+        <div className="labelInput">
+        <label htmlFor="healthy" className="text">Load a Image from URL</label>
+          <input
+            type="text"
+            id="picture"
+            name="picture"
+            className="inputText"
+            placeholder="example path https://www.myImage.com/food.png"
+            onChange={handleInputChange}
+          />  
+        </div>
         <div>
           <label htmlFor="diets" className="text"> Select your(s) diet(s)
-            <Checkboxes />
+            {/* <Checkboxes /> */}
+            <div key="1B" className="cheboxContainer">
+              {
+                dietsCheckBox && dietsCheckBox.map(
+                  diet =>
+                  <div key={diet.ID} className="cheboxLbl" >
+                    <div className="lblChekc">
+                      <label htmlFor={diet.ID}>{diet.name}</label>
+                    </div>
+                    <div className="inputCheck">
+                      <input
+                        type="checkbox"
+                        id={diet.ID}
+                        value={diet.name}
+                        name={diet.ID}
+                        onChange={handleCheckChange}
+                      />
+                    </div>
+                  </div>
+                )
+              }
+            </div>
+            {/* <Checkboxes /> */}
           </label>
         </div>
         <div className="button">

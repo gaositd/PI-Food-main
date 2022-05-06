@@ -14,7 +14,7 @@ export function Checkboxes() {
   useEffect(()=> dispatch(getDiets()),[dispatch]);
 
   let checks = [];
-  useEffect(()=> dispatch(sendDiets()),[checks]);
+  useEffect(()=> dispatch(sendDiets()),[dispatch]);
 
   function handleCheckChange(e){
     if(!checks.includes(e.target.value)){
@@ -23,6 +23,7 @@ export function Checkboxes() {
       checks = checks.filter(check => check !== e.target.value);
     }
   }
+  // dispatch(sendDiets(checks));
 
   return (
     <React.Fragment>

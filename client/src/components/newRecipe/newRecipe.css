@@ -4,7 +4,7 @@
   justify-content:center;
   align-items:center;
   width: 50%;
-  height: auto;
+  height: 94vh;
   margin: 3vh auto;
 }
 .form{
@@ -66,4 +66,14 @@ input, textarea{
   position: absolute;
   left: 10vw;
   text-shadow: 0 0 30px #fff;
+}
+.cheboxContainer{
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  justify-content:center;
+}
+.cheboxLbl{
+  font-size: 1.1rem;
+  width:10vw;
 }

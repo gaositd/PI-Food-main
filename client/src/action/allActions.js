@@ -75,6 +75,7 @@ function recipesByWord(searchRecipes){
 }
 
 function sendDiets(diets){
+  // debugger;
   return {
     type:SEND_DIETS,
     payload: diets

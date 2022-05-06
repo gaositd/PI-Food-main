@@ -7,10 +7,8 @@ import {
   getDiets,
   filterByDiet
 } from '../../../action/allActions';
-// import '../navbar.css';
 
 export function SelectOption() {
-  // const [select, setSelect] = useState([]);
   let dispatch = useDispatch();
   const diets = useSelector(state => state.allDiets);
   useEffect(()=> dispatch(getDiets()),[dispatch]);

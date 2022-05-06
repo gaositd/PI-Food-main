@@ -123,6 +123,7 @@ const routeReducer = (state = initialState, action) => {
         setRecipe:action.payload,
       }
     case SEND_DIETS:
+      // debugger;
       return{
         ...state,
         sendDiets:action.payload
