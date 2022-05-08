@@ -1,9 +1,7 @@
 import React, {
   useEffect,
-  // useState
 } from "react";
 import {
-  // Link,
   useNavigate
 } from 'react-router-dom';
 import { /*useSelector,*/useDispatch } from "react-redux";
@@ -13,10 +11,8 @@ import { SearchRecipe } from './searchRecipe/searchRecipe'
 import './navbar.css';
 
 export function Navbar(){
-  // let text;
   const history = useNavigate();
   let dispatch = useDispatch();
-  // const byName = useSelector(state => state.byName);
 
   function handleButtom(){
     history('/newRecipe');

@@ -51,22 +51,21 @@ function setRecipe(recipe){
     }
   }
 }
-
-//filter and order data
+//order data
 function filterByDiet(diet){
   return { 
     type: FILTER_DIET,
     payload: diet
   };
 }
-
+//sort Options
 function sortBy(sort){
   return {
     type:SORT_NAME,
     payload: sort
   }
 }
-
+// get recipes by word in the serach field
 function recipesByWord(searchRecipes){
   return {
     type:SEARCH_RECIPES,
@@ -75,7 +74,6 @@ function recipesByWord(searchRecipes){
 }
 
 function sendDiets(diets){
-  // debugger;
   return {
     type:SEND_DIETS,
     payload: diets

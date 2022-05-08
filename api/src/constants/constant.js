@@ -7,6 +7,7 @@ const LOAD_ERROR = "Loada data error";
 const NOT_FOUND = "Not found";
 const NOT_CREATE_ERROR = "Not created";
 const DATA_LOAD = "Data loaded successfully";
+const CERO_AUX = '0000000000';
 
 module.exports ={
   NO_RECIPE,
@@ -18,4 +19,5 @@ module.exports ={
   NOT_FOUND,
   NOT_CREATE_ERROR,
   DATA_LOAD,
+  CERO_AUX,
 }

@@ -46,8 +46,6 @@ export function Recipe(){
           <span className="font title">Diet(s)</span>
           <ul className="list">
             {
-              // oneRecipe.hasOwnProperty('createInDb') ?
-              // <li key={oneRecipe.diets} className="font">{oneRecipe.diets}</li> :
                 oneRecipe.diets && oneRecipe.diets.map((diet, i) =>{
                   return(<li key={i} className="font">{diet}</li>)})
             }

@@ -8,7 +8,6 @@ import {
 } from '../../action/allActions.js';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { Checkboxes } from "./checkBoxes/checkBoxes";
 import './newRecipe.css';
 
 let sendRecipe = {
@@ -115,16 +114,13 @@ export function NewRecipe(){
   }
 
   function handleSubmit(event){
-
-
-  // if(errors.length > 0){
   if(!input.dishName || !input.summary){
     alert('No submited, check mandatory fields');
     event.preventDefault();
     return;
   }else{
     dispatch(setRecipe(sendRecipe));
-    alert("Recipe was savedRecipe was saved, it will be redirected to home page.");
+    alert("Recipe was saved, it will be redirected to home page.");
     history('/home');
   }
   

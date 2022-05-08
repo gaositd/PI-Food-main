@@ -8,11 +8,11 @@ module.exports = (sequelize) => {
   sequelize.define("recipe", {
     id:{
       // type:DataTypes.UUID,
-      type:DataTypes.INTEGER,
+      type:DataTypes.BIGINT,
       allowNull:false,
       primaryKey:true,
       // default:DataTypes.UUIDV4,
-      autoIncrement:true,
+      // autoIncrement:true,
     },
     name: {//dato que ya estaba
       type: DataTypes.TEXT,

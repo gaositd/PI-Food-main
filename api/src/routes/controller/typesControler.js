@@ -1,5 +1,4 @@
 //Tenes que cargar en tu base de datos los tipos que estan en ese link por ejemplo Gluten Free, Ketogenic, y el resto la primera vez, luego una vez que ya estan cargados esa ruta /types debería devolverte el arreglo con todos esos tipos que previamente cargaste
-// const axios = require('axios');
 const { DietType } = require('../../../src/db');
 const { NOT_FOUND } = require('../../constants/constant');
 

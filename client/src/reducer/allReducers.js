@@ -64,17 +64,15 @@ const routeReducer = (state = initialState, action) => {
           ...state,
           byName:allRecipes
           .sort((a, b) =>{
-            const recipeA = a.name
-            const recipeB = b.name
-            if(recipeA > recipeB)
-              return 1;
-            if(recipeA < recipeB)
-              return -1;
-            return 0;
+              const recipeA = a.name
+              const recipeB = b.name
+              if(recipeA > recipeB) return 1;
+              if(recipeA < recipeB) return -1;
+              return 0;
             }
           )
         }
-      }//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+      }
       if(action.payload === NAME_DOWN){
         const {allRecipes} = state;
         return {
@@ -83,10 +81,8 @@ const routeReducer = (state = initialState, action) => {
           .sort((a, b) =>{
             const recipeA = a.name
             const recipeB = b.name
-            if(recipeA > recipeB)
-              return -1;
-            if(recipeA < recipeB)
-              return 1;
+            if(recipeA > recipeB) return -1;
+            if(recipeA < recipeB) return 1;
             return 0;
             }
           )
@@ -95,14 +91,11 @@ const routeReducer = (state = initialState, action) => {
       break;
     }
     case FILTER_SCORE:{
-      //const {allRecipes} = state;
       if(action.payload === HEALT_UP){
         return{
           ...state,
           byName:state.allRecipes
-            .sort((a,b)=>{
-              return a.healthScore - b.healthScore
-            })
+            .sort((a,b)=>{ return a.healthScore - b.healthScore })
         }
       }
       if(action.payload === HEALT_DOWN){
@@ -110,9 +103,7 @@ const routeReducer = (state = initialState, action) => {
         return{
           ...state,
           byName:allRecipes
-            .sort((a,b)=>{
-              return a.healthScore - b.healthScore
-            })
+            .sort((a,b)=>{ return a.healthScore - b.healthScore })
         }
       }
       break;
@@ -123,7 +114,7 @@ const routeReducer = (state = initialState, action) => {
         setRecipe:action.payload,
       }
     case SEND_DIETS:
-      // debugger;
+      
       return{
         ...state,
         sendDiets:action.payload

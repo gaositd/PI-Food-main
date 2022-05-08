@@ -1,27 +1,28 @@
 const axios = require('axios');
 const { Recipe, DietType } = require('../../../src/db');
-const { NOT_CREATE_ERROR, DATA_LOAD } = require('../../constants/constant');
-const crypto = require('crypto');
+const { CERO_AUX, DATA_LOAD } = require('../../constants/constant');
 
 async function createRecipe(req, res){
-  const { name, image, healthScore, summary, healthyLevel, diets, steps } = req.body;
-
+  const { name, image, healthyLevel, summary, healthScore, steps, diets, dishType } = req.body;
+  
+  let recipelen = await Recipe.count() + 1;
+  const idAux = '1'+CERO_AUX+recipelen;
+  
   const data = {
-    // id: crypto.randomUUID(),
-    id:null,
+    id: parseInt(idAux),
     name,
     image,
-    healthScore,
-    summary,
     healthyLevel,
-    diets,
+    summary,
+    healthScore,
     steps,
+    diets,
+    dishType,
     createInDb: true,
   };
 
   try{
     await Recipe.create(data);
-    // await Recipe.setRecipes(diets);
     res.status(201)
         .json({msg: DATA_LOAD});
   }catch(err){

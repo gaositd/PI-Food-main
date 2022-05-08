@@ -24,7 +24,6 @@ export function Home(){
   useEffect(()=> dispatch(sortBy),[dispatch]);
 
   const diet = useSelector(state => state.filterDiet);
-  // const byName = useSelector(state => state.byName);
   //use json file when apear message 402
   
   if(recipes){
@@ -73,7 +72,7 @@ export function Home(){
         !!recipes.length ?
           recipes
             .slice((currentPage - 1) * perPage,
-                   (currentPage - 1 ) * perPage + perPage)//currentPage, RECIPES_PER_PAGE)
+                   (currentPage - 1 ) * perPage + perPage)
             .map(recipe =>{
           return(
             <Link key={recipe.id} to={`/recipe/${recipe.id}`}>

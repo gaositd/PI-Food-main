@@ -23,7 +23,6 @@ export function Checkboxes() {
       checks = checks.filter(check => check !== e.target.value);
     }
   }
-  // dispatch(sendDiets(checks));
 
   return (
     <React.Fragment>

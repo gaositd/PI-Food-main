@@ -19,8 +19,6 @@ export function SearchRecipe(){
       searchRecipes = recipes.filter(recipe =>{
         return recipe.name.toLowerCase().includes(text.toLowerCase());
       });
-      // recipes = searchRecipes;
-      // return searchRecipes
       dispatch(recipesByWord(text.toLowerCase()));
     }
   }
