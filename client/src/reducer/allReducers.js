@@ -59,10 +59,10 @@ const routeReducer = (state = initialState, action) => {
     }
     case SORT_NAME:{
       if(action.payload === NAME_UP){
-        const {allRecipes} = state;
+        // const {allRecipes} = state;
         return {
           ...state,
-          byName:allRecipes
+          byName:state.allRecipes
           .sort((a, b) =>{
               const recipeA = a.name
               const recipeB = b.name
@@ -74,10 +74,10 @@ const routeReducer = (state = initialState, action) => {
         }
       }
       if(action.payload === NAME_DOWN){
-        const {allRecipes} = state;
+        // const {allRecipes} = state;
         return {
           ...state,
-          byName:allRecipes
+          byName:state.allRecipes
           .sort((a, b) =>{
             const recipeA = a.name
             const recipeB = b.name
@@ -88,9 +88,6 @@ const routeReducer = (state = initialState, action) => {
           )
         }
       }
-      break;
-    }
-    case FILTER_SCORE:{
       if(action.payload === HEALT_UP){
         return{
           ...state,
@@ -103,7 +100,7 @@ const routeReducer = (state = initialState, action) => {
         return{
           ...state,
           byName:allRecipes
-            .sort((a,b)=>{ return a.healthScore - b.healthScore })
+            .sort((a,b)=>{ return b.healthScore - a.healthScore })
         }
       }
       break;

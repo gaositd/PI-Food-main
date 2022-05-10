@@ -124,7 +124,7 @@ export function NewRecipe(){
     history('/home');
   }
   
-}
+  }
 
   return(
     <main className="mainPage">
@@ -263,4 +263,3 @@ export function NewRecipe(){
     </main>
   )
 }
-/*  https://www.petitchef.es/recetas/plato/tacos-vegetarianos-con-lentejas-fid-1572375 */

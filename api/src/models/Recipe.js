@@ -21,7 +21,6 @@ module.exports = (sequelize) => {
     image:{
       type:DataTypes.TEXT,
       allowNull: false,
-      default:'https://images.vexels.com/media/users/3/249295/isolated/lists/6b84c3546f5ab87ecf81c577245c13ae-ramen-svg-2-1.png',
       comment:'https://www.freepng.es/png-vft0iv/download.html'
     },
     healthyLevel:{
@@ -39,9 +38,9 @@ module.exports = (sequelize) => {
     steps:{
       type: DataTypes.TEXT,
     },
-    diets:{
-      type: DataTypes.TEXT,
-    },
+    // diets:{
+    //   type: DataTypes.TEXT,
+    // },
     dishType:{
       type:DataTypes.TEXT,
     },
