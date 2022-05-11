@@ -52,7 +52,7 @@ export function Recipe(){
           </ul>
         </div>
         <div className="healt">
-          <p className="font title">Score Level: <span>{oneRecipe.score}</span></p>
+          {/* <p className="font title">Score Level: <span>{oneRecipe.score}</span></p> */}
             <p className="font title">Healt Score: <span>{oneRecipe.healthScore}</span></p>
           </div>
       </div>

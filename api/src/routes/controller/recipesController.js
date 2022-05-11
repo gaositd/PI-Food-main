@@ -51,10 +51,11 @@ async function getAllRecipes(req, res) {
           healthScore: recipe.healthScore,
           steps: recipe.steps,
           diets: recipe.diets,
-          dishTypes: "",
+          dishTypes: recipe.dishType,
           createInDb: recipe.createInDb
         })
       });
+      const recepeAux = [].concat(recipes100PI,arrAux );
       recipes100PI = recipes100PI.concat(arrAux);
     }
     if (recipes100.length === 0)

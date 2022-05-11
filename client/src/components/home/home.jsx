@@ -53,6 +53,11 @@ export function Home(){
     recipes = SearchRecipe;
   }
 
+  const order = useSelector(state => state.byName);
+  if(order.length > 0){
+    recipes = order;
+  }
+
   let maxPages = Math.round(recipes.length / RECIPES_PER_PAGE);
 
   return(

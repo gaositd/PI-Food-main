@@ -187,7 +187,7 @@ export function NewRecipe(){
               onChange={handleInputChange}
             />
         </div>
-        <div className="labelInput">
+        {/* <div className="labelInput">
           <label htmlFor="score" className="text">Score Recipe</label>
             <input
               className="inputText"
@@ -199,7 +199,7 @@ export function NewRecipe(){
               placeholder="Score 1 to 100"
               onChange={handleInputChange}
             />
-        </div>
+        </div> */}
         <div className="labelInput">
 
         <label htmlFor="healthy" className="text">Dish Type</label>

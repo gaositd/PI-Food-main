@@ -28,10 +28,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    healthScore:{
-      type: DataTypes.INTEGER,
-      default:0.00,
-    },
+    // healthScore:{
+    //   type: DataTypes.INTEGER,
+    //   default:0.00,
+    // },
     steps:{
       type: DataTypes.TEXT,
     },
