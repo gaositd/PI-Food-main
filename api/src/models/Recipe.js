@@ -7,12 +7,9 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("recipe", {
     id:{
-      // type:DataTypes.UUID,
       type:DataTypes.BIGINT,
       allowNull:false,
       primaryKey:true,
-      // default:DataTypes.UUIDV4,
-      // autoIncrement:true,
     },
     name: {//dato que ya estaba
       type: DataTypes.TEXT,
@@ -38,9 +35,9 @@ module.exports = (sequelize) => {
     steps:{
       type: DataTypes.TEXT,
     },
-    // diets:{
-    //   type: DataTypes.TEXT,
-    // },
+    diets:{
+      type: DataTypes.TEXT,
+    },
     dishType:{
       type:DataTypes.TEXT,
     },

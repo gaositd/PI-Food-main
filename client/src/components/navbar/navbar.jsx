@@ -4,9 +4,9 @@ import React, {
 import {
   useNavigate
 } from 'react-router-dom';
-import { /*useSelector,*/useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SelectOption } from "./selectOption/selectOption";
-import { sortBy/*, getRecipes*/ } from "../../action/allActions";
+import { sortBy } from "../../action/allActions";
 import { SearchRecipe } from './searchRecipe/searchRecipe'
 import './navbar.css';
 
@@ -17,11 +17,14 @@ export function Navbar(){
   function handleButtom(){
     history('/newRecipe');
   }
-
+  // let recipes = useSelector(state =>state.allRecipes);//get all recipe
   const handleClick =(event)=>{
     dispatch(sortBy(event.target.id));
   }
   useEffect(()=> dispatch(sortBy()),[dispatch]);
+  // useEffect(()=> dispatch(sortBy()),[dispatch]);
+//useEffect(()=> dispatch(recipesByWord(recipes)),[recipes]
+  // );
 
   return(
     <header className="navbar-header">
@@ -30,10 +33,6 @@ export function Navbar(){
       </section>
       <section className="navBar navbar-sideCenter">
         <div className="navbar-Sort">
-          {/* <span className="text"> | </span>
-          <button id="dietUp" className="btnNavBar" value='dietUp' onClick={handleClick}>Up</button>
-            <span className="text">Sort by diet</span>
-          <button id="dietDown" className="btnNavBar" onClick={handleClick}>Down</button>  */}
           <span className="text"> | </span>
           <button id="healtUp" className="btnNavBar" onClick={handleClick}>Up</button>
           <span className="text">Sort by Healthy</span>
@@ -46,12 +45,6 @@ export function Navbar(){
         </div>
       </section>
       <section className="navBar navbar-sideRight">
-        {/* <div className="searchNavBar">
-          <Link to="">
-            <img src={Glass} alt="Magnify glass" className="glass" height="25vh" onClick={getText} />
-          </Link>
-          <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" onBlur={handleSendRecipes} />
-        </div> */}
         <SearchRecipe />
         <button className="btnSearch" id="createRecipe" name="createRecipe" onClick={handleButtom}>
           Create Recipe

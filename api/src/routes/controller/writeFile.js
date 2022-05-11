@@ -10,9 +10,6 @@ async function writeJSONFile (){
     .catch(err =>{msg:NO_RECIPE+err.message});
     const data = JSON.stringify(result, null, 4);
     
-    // fs.writeFileSync('recipes.json', data, {flag: "a+", encoding: "utf8", mode: "0644",},(err)=>{
-    //   if(err){ throw err.message; }
-    // });
     fs.writeFileSync('recipes.json', data);
 
   }catch(err){

@@ -1,107 +1,107 @@
 [
   {
     "id": null,
-    "name":"Gluten Free",
+    "name":"gluten free",
     "summary":"Eliminating gluten means avoiding wheat, barley, rye, and other gluten-containing grains and foods made from them (or that may have been cross contaminated)."
   },
   {
     "id": null,
-    "name":"Ketogenic",
+    "name":"ketogenic",
     "summary":"The keto diet is based more on the ratio of fat, protein, and carbs in the diet rather than specific ingredients. Generally speaking, high fat, protein-rich foods are acceptable and high carbohydrate foods are not. The formula we use is 55-80% fat content, 15-35% protein content, and under 10% of carbohydrates."
   },
   {
     "id": null,
-    "name":"Vegetarian",
+    "name":"vegetarian",
     "summary":"No ingredients may contain meat or meat by-products, such as bones or gelatin."
   },
   {
     "id": null,
-    "name":"Lacto-Vegetarian",
+    "name":"lacto ovo vegetarian",
     "summary":"All ingredients must be vegetarian and none of the ingredients can be or contain egg."
   },
   {
     "id": null,
-    "name":"Ovo-Vegetarian",
+    "name":"ovo vegetarian",
     "summary":"All ingredients must be vegetarian and none of the ingredients can be or contain dairy."
   },
   {
     "id": null,
-    "name":"Vegan",
+    "name":"vegan",
     "summary":"No ingredients may contain meat or meat by-products, such as bones or gelatin, nor may they contain eggs, dairy, or honey."
   },
   {
     "id": null,
-    "name":"Pescetarian",
+    "name":"pescetarian",
     "summary":"Everything is allowed except meat and meat by-products - some pescetarians eat eggs and dairy, some do not."
   },
   {
     "id": null,
-    "name":"Paleo",
+    "name":"paleo",
     "summary":"Allowed ingredients include meat (especially grass fed), fish, eggs, vegetables, some oils (e.g. coconut and olive oil), and in smaller quantities, fruit, nuts, and sweet potatoes. We also allow honey and maple syrup (popular in Paleo desserts, but strict Paleo followers may disagree). Ingredients not allowed include legumes (e.g. beans and lentils), grains, dairy, refined sugar, and processed foods."
   },
   {
     "id": null,
-    "name":"Primal",
+    "name":"primal",
     "summary":"Very similar to Paleo, except dairy is allowed - think raw and full fat milk, butter, ghee, etc."
   },
   {
     "id": null,
-    "name":"Low FODMAP",
+    "name":"fodmap friendly",
     "summary":"FODMAP stands for <strong>fermentable oligo-, di-, mono-saccharides and polyols</strong>. Our ontology knows which foods are considered high in these types of carbohydrates (e.g. legumes, wheat, and dairy products)"
   },
   {
     "id": null,
-    "name":"Whole30",
+    "name":"whole30",
     "summary":"Allowed ingredients include meat, fish/seafood, eggs, vegetables, fresh fruit, coconut oil, olive oil, small amounts of dried fruit and nuts/seeds. Ingredients not allowed include added sweeteners (natural and artificial, except small amounts of fruit juice), dairy (except clarified butter or ghee), alcohol, grains, legumes (except green beans, sugar snap peas, and snow peas), and food additives, such as carrageenan, MSG, and sulfites."
   },
   {
     "id": null,
-    "name":"Dairy Free",
+    "name":"dairy free",
     "summary":"A dairy-free diet includes avoiding all or most dairy products including milk, butter, yoghurt, cheese, cream and ice cream. Unlike a vegan or plant-based diet, a dairy-free still  includes other animal products, such as meat, fish and eggs. If you’re on a very strict dairy-free die or have a dairy allergy or intolerance to lactose, you might need to avoid all products containing milk, even in small or trace amounts. Some products that do not contain milk as an intentional ingredient may have been made within a production facility that handles dairy, which can leave a small risk of cross-contamination."
   },
   {
     "id": null,
-    "name":"Paleolithic",
+    "name":"paleolithic",
     "summary":"The Paleo Diet is a guide to get you started on the Paleolithic diet. Not only does it explain the science and research behind the diet, it offers numerous Paleo recipes you can try right away."
   },
   {
     "id": null,
-    "name":"Valentine's Day",
+    "name":"valentine's day",
     "summary":"Lunch and dinner should include normal rice (brown, red or hand pounded is always better) or roti with dal or a chicken gravy, lots of vegetables. Finish the meal with a fruit instead of sweets. After following this diet, you should feel lighter."
   },
   {
     "id": null,
-    "name":"Father's Day",
+    "name":"father's day",
     "summary":"While Chinese food is a go-to for many, dads count this cuisine – and specifically dishes like chicken egg foo young, cold sesame noodles, fried rice, and dumplings – among their favorite. Dads order this combination of eats between 8 and 9 times more than other people."
   },
   {
     "id": null,
-    "name":"Mom's Day",
+    "name":"mom's day",
     "summary":"You can go for milk, cheese, yogurt or even a delicious milk smoothie with fruits. “Dairy products are rich in protein, Vitamin B and D and have plenty of calcium. The best plan is to have three servings of dairy products every day,” she says. She also advises new mothers to consume legumes"
   },
   {
     "id": null,
-    "name":"Omnivore",
+    "name":"omnivore",
     "summary":"A mixture of meat, fish, fruit, vegetables, grains, etc. It can be healthy if following a balanced whole food or so-called <strong>clean eating</strong> diet1 or unhealthy if eating the Standard American Diet"
   },
   {
     "id": null,
-    "name":"Clean Eating",
+    "name":"clean eating",
     "summary":"Clean eating simply means eating natural foods instead of processed foods. Fresh fruits and vegetables, beans, lentils, nuts, eggs, plain dairy, unprocessed meat and fish, and less refined carbohydrates (e.g. brown rice, oats, quinoa) are all acceptable foods. Nutritionally empty foods, such as pasta, cereal, etc. made with wheat flour and most things you'll find in the salty or sweet snack aisles are out. If you've heard that tip about mostly shopping the perimeter of the supermarket and avoiding the aisles in the middle, it can definitely apply her"
   },
   {
     "id": null,
-    "name":"Mediterranean",
+    "name":"mediterranean",
     "summary":"Often a top contender in which diet is best rankings, the Mediterranean Diet fits under the omnivore category. The Mediterranean Diet is a bit hard to define, since numerous countries border the Mediterranean Sea and they all have their own unique cuisines. Nonetheless, a Mediterranean-style diet is typically understood to mean one where:  \n consumption of red meat is substantially reduced \n eggs and dairy are eaten in moderation \n fish and seafood are enjoyed more often \n fruits, \n vegetables, whole grains, and legumes form the basis of the diet \n Mediterranean diets are also known to be higher in monounsaturated and polyunsaturated fats, from olive oil for example, rather than saturated fat. As you probably expect, this diet also focuses on natural, minimally processed foods, similar to the clean eating philosophy"
   },
   {
     "id": null,
-    "name":"Weight Watchers",
+    "name":"weight watchers",
     "summary":"The Weight Watchers program, unlike the other omnivorous diets we've discussed so far, has no rules about which foods you can and cannot eat. Instead, you are given an allotment of SmartPoints based on your age, gender, weight, and height. Using the formula they have developed, they determine how many SmartPoints any individual food, recipe, or restaurant meal has. You can decide how to spend your SmartPoints based on what you choose to eat, but you shouldn't exceed your daily points if you want to lose weight. Though they encourage healthy eating, the real goal with the Weight Watchers program (not surprisingly considering the name) is weight loss."
   },
   {
     "id": null,
-    "name":"Grain Free",
+    "name":"grain free",
     "summary":"The difference between gluten free and grain free is simple: a gluten free diet avoids grains that contain gluten, while a grain free diet avoids all grains, even those that do not contain gluten. This means a grain free diet is a gluten free diet (because it does not include wheat or gluten-containing grains), but a gluten free diet is not necessarily a grain free diet (because it can include grains that do not contain gluten, such as rice and corn.) It is difficult to find grain free processed foods, so going grain free could lead to a more healthful diet. However, if you don't have allergies that require a grain free diet, there is evidence to suggest whole grains can have beneficial health effects when eaten in the recommended quantities."
   },
   {
@@ -111,7 +111,7 @@
   },
   {
     "id": null,
-    "name":"Fruitarian",
+    "name":"fruitarian",
     "summary":"This diet is, as the name suggests, a fruit-based diet. In its purest form, fruitarianism is truly limited to consuming fruit, though some fruitarians eat vegetables, nuts, and seeds"
   }
 ]

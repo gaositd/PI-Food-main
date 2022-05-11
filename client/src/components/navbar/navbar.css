@@ -9,15 +9,6 @@
   justify-content: space-evenly;
   align-items: center;
 }
-/* .navbar-sideLeft{
-  width: auto;
-}
-.navbar-sideCenter{
-  width: 60%;
-}
-.navbar-sideRight{
-  width: auto;
-} */
 .navSelect{
   background:rgba(63, 64, 60, 0.7);
   border: none;

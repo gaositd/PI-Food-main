@@ -38,7 +38,6 @@ async function createRecipe(req, res){
     const ids = allDiets.map(dieta => {
       return dieta.ID;
     });
-    // debugger;
     //lenado de tabla intermedia
     let RecipeCreate = await Recipe.create(data);
     await RecipeCreate.setDietType(ids);
@@ -50,18 +49,3 @@ async function createRecipe(req, res){
 };
 
 module.exports = createRecipe;
-/*
-const { name, difficulty, duration, season, countries } = req.body;
-
-let act = {name, difficulty, duration, season};
-let activity = await Activity.create(act);
-await activity.setCountries(countries);
-res.status(201).send('OK');
-
-
-let genresParsed = gGenres.map(g => JSON.parse(g));
-const addedGenre = await genresParsed.map(g => createdGame.addGenre(g.id));
-await Promise.all(addedGenre);
-res.status(201).send('Game created successfully');
-
-*/

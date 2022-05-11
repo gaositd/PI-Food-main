@@ -36,7 +36,9 @@ export function Home(){
   let newRecipes = {};
   if(diet){
     newRecipes = recipes.filter(recipe =>{
-      return recipe.diets.toLowerCase().includes(diet.toLowerCase()); 
+        return recipe
+          .diets
+          .includes(diet);
       }
     );
 
@@ -56,9 +58,7 @@ export function Home(){
   return(
     <React.Fragment>
       <Navbar />
-      {
-        newRecipes.length === 0 ? <span className="text">We don't have any recipes with this diet or select your diet</span> : ""
-      }
+      { newRecipes.length === 0 ? <span className="text">We don't have any recipes with this diet or select your diet</span> : "" }
       <br />
       <h1 className="text">All Recipes, move between recipes ➭ </h1>
       <Pagination
