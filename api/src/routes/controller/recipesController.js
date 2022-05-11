@@ -7,7 +7,7 @@ async function getAllRecipes(req, res) {
   let arrAux = [];
   try {
 
-    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.API_KEY}`);
+    const recipes100 = await axios.get(`${SPOONACULAR}complexSearch?&addRecipeInformation=true&number=100&apiKey=${process.env.APIKEY0}`);
     let recipes100PI = recipes100.data.results.map(recipe => {
       return {
         id: recipe.id,
@@ -55,7 +55,6 @@ async function getAllRecipes(req, res) {
           createInDb: recipe.createInDb
         })
       });
-      const recepeAux = [].concat(recipes100PI,arrAux );
       recipes100PI = recipes100PI.concat(arrAux);
     }
     if (recipes100.length === 0)
