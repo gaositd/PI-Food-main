@@ -22,3 +22,9 @@
   background-color:white;
   color: black;
 }
+.music{
+  display: flex;
+  justify-content: flex-start;
+  color: #03363D;
+  font-size: 5rem;
+}

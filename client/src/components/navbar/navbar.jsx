@@ -47,7 +47,7 @@ export function Navbar(){
       <section className="navBar navbar-sideRight">
         <SearchRecipe />
         <button className="btnSearch" id="createRecipe" name="createRecipe" onClick={handleButtom}>
-          Create Recipe
+          New Recipe
         </button>
       </section>
     </header>

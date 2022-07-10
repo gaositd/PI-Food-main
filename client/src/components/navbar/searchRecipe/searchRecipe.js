@@ -26,7 +26,7 @@ export function SearchRecipe(){
   return(
     <div className="searchNavBar">
       <Link to="/home" recipes={searchRecipes}>
-        <img src={Glass} alt="Magnify glass" className="glass" height="25vh" onClick={handleSendRecipes} />
+        <img src={Glass} alt="Magnify glass" className="glass" width="20vw" height="18vh" onClick={handleSendRecipes} />
       </Link>
       <input type="text" name="searchNavBar" id="searchNavBar" className="searchNavBar" />
     </div>
